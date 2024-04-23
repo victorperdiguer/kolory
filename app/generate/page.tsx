@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function ProtectedPage() {
+function Page() {
   return (
     <div>
       <h1>Protected page -- you made it!</h1>
     </div>
   )
 }
+
+export default Page
