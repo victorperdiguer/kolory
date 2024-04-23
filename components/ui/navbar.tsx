@@ -1,13 +1,11 @@
 'use client'
 
 import { Button } from "./button"
-import Providers from "@/app/Providers"
 import { signIn, signOut, useSession } from "next-auth/react"
 
 function Navbar() {
   const {data: session} = useSession()
   console.log(session)
-  console.log('hola')
 
   return (
     <nav className="bg-slate-900 flex justify-between text-white">
