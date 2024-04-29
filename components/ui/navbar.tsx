@@ -1,8 +1,11 @@
 'use client'
 
 import { Button } from "./button"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { Gluten } from "next/font/google";
+import SignInComponent from "./authentication-ui/signed-in";
+import SignOutComponent from "./authentication-ui/signed-out";
+
 
 const gluten = Gluten({
   weight: "900",
@@ -23,19 +26,9 @@ function Navbar() {
 
       </div>
       {session?.user ? (
-        <div>
-          <h4>Hello, {session.user.name}</h4>
-          <div>
-            <img src={session.user.image || ''} alt="profile image" className="w-10 h-10 rounded-full cursor-pointer"/>
-          </div>
-          <Button onClick={() => signOut()}>
-            Sign out
-          </Button>
-        </div>
+        <SignOutComponent/>
       ) : (
-        <Button onClick={() => signIn()}>
-          Sign In
-        </Button>
+        <SignInComponent/>
       )}
     </nav>
   )
