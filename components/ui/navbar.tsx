@@ -2,16 +2,23 @@
 
 import { Button } from "./button"
 import { signIn, signOut, useSession } from "next-auth/react"
+import { Gluten } from "next/font/google";
+
+const gluten = Gluten({
+  weight: "900",
+  subsets: ['latin']
+})
+
 
 function Navbar() {
   const {data: session} = useSession()
   console.log(session)
 
   return (
-    <nav className="bg-slate-900 flex justify-between text-white">
+    <nav className="bg-slate-900 flex justify-between text-white gluten-logo">
       <div>
-        <h1>
-          This is the Navbar
+        <h1 className={gluten.className}>
+          KOLORY
         </h1>
 
       </div>
