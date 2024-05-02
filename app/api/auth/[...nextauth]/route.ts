@@ -5,7 +5,6 @@ import connectMongoDB from "@/lib/mongodb"
 import User from "@/models/User"
 
 const handler = NextAuth({
-  // Configure one or more authentication providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
