@@ -13,7 +13,7 @@ const gluten = Gluten({
 function Navbar() {
 
 return (
-    <nav className="p-4 border-b-2 w-full h-[4.1rem] bg-white z-10">
+    <nav className="p-3 border-b-2 w-full h-[4.1rem] bg-white z-10">
         <div className="flex justify-between text-white items-center">
           <div className="flex justify-center items-center">
             <div>
