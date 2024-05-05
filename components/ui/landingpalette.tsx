@@ -3,8 +3,7 @@
 import React from "react"
 import { useEffect, useState } from 'react';
 import {motion, useAnimation} from 'framer-motion';
-
-const generateRandomColor = () => `#${Math.floor(Math.random()*16777215).toString(16)}`;
+import randomColor from 'randomcolor';
 
 const paths = [
   "M482.8,266.365l-324,187.6h300.4c19.6,0,34.4-16,34.4-35.6v-125.2 C494,282.765,490.8,273.165,482.8,266.365z",
@@ -30,7 +29,7 @@ const LandingPalette = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setColors(colors => colors.map(() => generateRandomColor()));
+      setColors(colors => randomColor({hue: 'random',count: 9}));
     }, 4000);
     return () => clearInterval(intervalId);
   }, []);
