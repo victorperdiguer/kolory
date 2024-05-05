@@ -3,18 +3,23 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Image from "next/image";
+import randomColor from "randomcolor";
 
 function Page() {
 
   const navigate = useRouter();
 
+  const colorURL = randomColor({hue: 'random', count: 5, luminosity: 'random'}).join("-").replaceAll("#", "");
+
   useEffect(() => {
-    navigate.push("/colors/faeiurfhaelfrea");
+    setTimeout(() => {
+    navigate.push(`/colors/${colorURL}`);
+    }, 1000)
   }, []);
 
   return (
     <div>
-      <div className="h-screen bg-white w-screen flex justify-center items-center">
+      <div className="h-screen bg-white w-screen flex justify-center items-center" style={{height: 'calc(100vh - 4rem'}}>
         <Image src="/kolorylogo.svg" alt="logo" width={100} height={100} className="animate-spin rounded-full"/>
       </div>
     </div>

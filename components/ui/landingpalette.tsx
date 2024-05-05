@@ -29,7 +29,7 @@ const LandingPalette = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setColors(colors => randomColor({hue: 'random',count: 9}));
+      setColors(colors => randomColor({hue: 'random',count: 9, luminosity: 'random'}));
     }, 4000);
     return () => clearInterval(intervalId);
   }, []);
