@@ -18,7 +18,7 @@ const paths = [
 ]
 
 const LandingPalette = () => {
-  const [colors, setColors] = useState(["#DF5C4E", "#EF934A", "#FFC52F", "#4BB19B", "#33A5D2", "#7D8B95", "#CCCCCC", "#AEB1B4", "#E8E3E3"]);
+  const [colors, setColors] = useState(["#00AB5E", "#0065A3", "#012E49", "#E80048", "#FF4949", "#FF9100", "#FFD400", "#FFD400", "#008ADF"]);
   const controls = useAnimation();
 
   useEffect(() => {
