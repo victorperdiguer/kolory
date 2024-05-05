@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/mongodb.ts", "app/api/user/route.ts", "components/ui/authentication-ui/signed-in.jsx", "models/User.js", "components/ui/landingpalette.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/mongodb.ts", "app/api/user/route.ts", "components/ui/authentication-ui/signed-in.jsx", "models/User.js", "components/ui/landingpalette.tsx", "components/ui/testpalette.jsx"],
   "exclude": ["node_modules"]
 }
