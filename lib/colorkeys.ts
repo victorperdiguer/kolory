@@ -145,6 +145,7 @@ export const colorMap = {
   violet: "Violet",
   wheat: "Wheat",
   whitesmoke: "White Smoke",
-  yellowgreen: "Yellow Green"
+  yellowgreen: "Yellow Green",
+  rebeccapurple: "Rebecca Purple",
 };
 
