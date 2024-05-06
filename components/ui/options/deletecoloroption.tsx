@@ -10,10 +10,13 @@ import {
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { colord } from "colord";
 
 
 const DeleteColorOption = ({ textColor, color, colorIndex }: { textColor: string, color: string, colorIndex: number }) => {
   const {pattern} = useParams<{pattern: string}>();
+
+  const hoverColor = colord(color).isLight() ? colord(color).darken(0.1).toHex() : colord(color).lighten(0.1).toHex();
 
   const {lockedColors, handleLockColor} = useContext(LockedColorsContext);
 
@@ -40,8 +43,7 @@ return (
             setOptionHover(false);
         }}
         className="rounded-lg aspect-square flex justify-center items-center p-1.5"
-        style={{ backgroundColor: optionHover ? "rgba(0, 0, 0, 0.1)" : "transparent" }}
-    >
+        style={{ backgroundColor: optionHover ? hoverColor : "transparent" }} >
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
