@@ -1,4 +1,5 @@
 import React from "react"
+import { useState } from "react";
 import { LockOpen, Lock, Trash2, Heart, Grip, Layers, Info, Delete} from "lucide-react";
 import LockOption from "./options/lockoption";
 import DeleteColorOption from "./options/deletecoloroption";

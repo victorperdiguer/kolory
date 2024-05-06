@@ -16,9 +16,9 @@ const LockOption = ({ textColor, color, colorIndex }: { textColor: string, color
   const {lockedColors, handleLockColor} = useContext(LockedColorsContext);
 
   const lockHandler = () => {
-    console.log("hola")
     handleLockColor(colorIndex);
   };
+
 
 return (
     <div

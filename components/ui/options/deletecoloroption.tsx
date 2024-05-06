@@ -26,9 +26,7 @@ const DeleteColorOption = ({ textColor, color, colorIndex }: { textColor: string
     const currentColors = pattern.split('-')
     const newColors = currentColors.filter((color, index) => index !== clickedColorPosition)
     const newParams = newColors.join('-')
-    if (lockedColors.some((e) => e == clickedColorPosition)) {
-      handleLockColor(clickedColorPosition)
-    }
+    handleLockColor(clickedColorPosition, true)
     navigate.push(`/colors/${newParams}`)
   };
 

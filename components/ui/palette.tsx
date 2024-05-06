@@ -32,8 +32,6 @@ const Palette = ({
 
   const [paletteHover, setPaletteHover] = useState(false);
 
-
-
   return (
     <div
       style={{ backgroundColor: color, height: "calc(100vh - 4rem" }}
