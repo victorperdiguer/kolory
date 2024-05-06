@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { useState, useContext } from "react";
-import { LockOpen, LockKeyhole } from "lucide-react";
+import { Grip } from "lucide-react";
 import {
   Tooltip,
   TooltipProvider,
@@ -9,19 +9,13 @@ import {
 } from "../tooltip";
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { colord } from "colord";
+import { DragControls } from "framer-motion";
 
-const LockOption = ({ color, colorIndex }: { color: string, colorIndex: number }) => {
+const MoveOption = ({ color, colorIndex, dragControls }: {color: string, colorIndex: number, dragControls: DragControls }) => {
 
   const [optionHover, setOptionHover] = useState(false);
 
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
-
-  const {lockedColors, handleLockColor} = useContext(LockedColorsContext);
-
-  const lockHandler = () => {
-    handleLockColor(colorIndex);
-  };
-
 
 return (
     <div
@@ -33,19 +27,18 @@ return (
         }}
         className="rounded-lg aspect-square flex justify-center items-center p-1.5"
         style={{ backgroundColor: optionHover ? hoverColor : "transparent" }}
+        onPointerDown={(e) => {
+          e.preventDefault()
+          dragControls.start(e, { snapToCursor: true })
+        }}
     >
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
-                    {" "}
-                    {lockedColors && !lockedColors.some((e) => e == colorIndex) ? (
-                        <LockOpen onClick={() => lockHandler()} />
-                    ) : (
-                        <LockKeyhole onClick={() => lockHandler()} />
-                    )}
+                    <Grip/>
                 </TooltipTrigger>
                 <TooltipContent>
-                    {lockedColors && !lockedColors.some((e) => e == colorIndex) ? <p>Lock color</p> : <p>Unlock color</p>}
+                    <p>Drag around to switch places</p>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
@@ -53,4 +46,4 @@ return (
 );
 };
 
-export default LockOption;
+export default MoveOption;

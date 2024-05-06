@@ -13,10 +13,10 @@ import { useRouter } from "next/navigation";
 import { colord } from "colord";
 
 
-const DeleteColorOption = ({ textColor, color, colorIndex }: { textColor: string, color: string, colorIndex: number }) => {
+const DeleteColorOption = ({ color, colorIndex }: { color: string, colorIndex: number }) => {
   const {pattern} = useParams<{pattern: string}>();
 
-  const hoverColor = colord(color).isLight() ? colord(color).darken(0.1).toHex() : colord(color).lighten(0.1).toHex();
+  const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
 
   const {lockedColors, handleLockColor} = useContext(LockedColorsContext);
 
