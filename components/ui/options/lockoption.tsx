@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useContext } from "react";
+import React, { use } from "react";
+import { useState, useContext, useEffect } from "react";
 import { LockOpen, LockKeyhole } from "lucide-react";
 import {
   Tooltip,
@@ -11,13 +11,14 @@ import { LockedColorsContext } from "@/lib/lockedColorsContext";
 
 const LockOption = ({ textColor, color, colorIndex }: { textColor: string, color: string, colorIndex: number }) => {
 
-  const lockHandler = (lockStatus: boolean) => {
-    handleLockColor(colorIndex);
-  };
-
   const [optionHover, setOptionHover] = useState(false);
 
   const {lockedColors, handleLockColor} = useContext(LockedColorsContext);
+
+  const lockHandler = () => {
+    console.log("hola")
+    handleLockColor(colorIndex);
+  };
 
 return (
     <div
@@ -34,14 +35,14 @@ return (
             <Tooltip>
                 <TooltipTrigger>
                     {" "}
-                    {!lockedColors.some((e) => e == colorIndex) ? (
-                        <LockOpen onClick={() => lockHandler(false)} />
+                    {lockedColors && !lockedColors.some((e) => e == colorIndex) ? (
+                        <LockOpen onClick={() => lockHandler()} />
                     ) : (
-                        <LockKeyhole onClick={() => lockHandler(true)} />
+                        <LockKeyhole onClick={() => lockHandler()} />
                     )}
                 </TooltipTrigger>
                 <TooltipContent>
-                    {!lockedColors.some((e) => e == colorIndex) ? <p>Lock color</p> : <p>Unlock color</p>}
+                    {lockedColors && !lockedColors.some((e) => e == colorIndex) ? <p>Lock color</p> : <p>Unlock color</p>}
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>

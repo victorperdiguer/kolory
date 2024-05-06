@@ -7,6 +7,8 @@ import randomColor from "randomcolor";
 
 function Page() {
 
+  sessionStorage.clear()
+
   const navigate = useRouter();
 
   const colorURL = randomColor({hue: 'random', count: 5, luminosity: 'random'}).join("-").replaceAll("#", "");
