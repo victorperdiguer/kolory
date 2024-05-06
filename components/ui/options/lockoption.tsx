@@ -9,11 +9,10 @@ import {
 } from "../tooltip";
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 
-const LockOption = ({ textColor }: { textColor: string }) => {
-  const [locked, setLocked] = useState(false);
+const LockOption = ({ textColor, color, colorIndex }: { textColor: string, color: string, colorIndex: number }) => {
 
-  const lockHandler = () => {
-    setLocked(!locked);
+  const lockHandler = (lockStatus: boolean) => {
+    handleLockColor(colorIndex);
   };
 
   const [optionHover, setOptionHover] = useState(false);
@@ -35,14 +34,14 @@ return (
             <Tooltip>
                 <TooltipTrigger>
                     {" "}
-                    {locked ? (
-                        <LockOpen onClick={() => lockHandler()} />
+                    {!lockedColors.some((e) => e == colorIndex) ? (
+                        <LockOpen onClick={() => lockHandler(false)} />
                     ) : (
-                        <LockKeyhole onClick={() => lockHandler()} />
+                        <LockKeyhole onClick={() => lockHandler(true)} />
                     )}
                 </TooltipTrigger>
                 <TooltipContent>
-                    {locked ? <p>Lock color</p> : <p>Unlock color</p>}
+                    {!lockedColors.some((e) => e == colorIndex) ? <p>Lock color</p> : <p>Unlock color</p>}
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>

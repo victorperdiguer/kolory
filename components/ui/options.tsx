@@ -2,7 +2,7 @@ import React from "react"
 import { LockOpen, Lock, Trash2, Heart, Grip, Layers, Info} from "lucide-react";
 import LockOption from "./options/lockoption";
 
-const Options = ({textColor} : {textColor: string}) => {
+const Options = ({textColor, color, colorIndex} : {textColor: string, color: string, colorIndex: number}) => {
 
   return (
     <div className="flex lg:flex-col flex-row-reverse justify-center gap-7">
@@ -11,7 +11,7 @@ const Options = ({textColor} : {textColor: string}) => {
       <Grip></Grip>
       <Heart></Heart>
       <Layers></Layers>
-      <LockOption textColor={textColor}></LockOption>
+      <LockOption textColor={textColor} color={color} colorIndex={colorIndex}></LockOption>
     </div>
   )
 };

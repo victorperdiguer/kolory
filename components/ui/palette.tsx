@@ -46,7 +46,7 @@ const Palette = ({
       onMouseEnter={() => setPaletteHover(true)}
       onMouseLeave={() => setPaletteHover(false)}
     >
-      {paletteHover && <Options textColor={textColor}></Options>}
+      {paletteHover && <Options textColor={textColor} color={color} colorIndex={colorIndex}></Options>}
 
       <div className="absolute lg:bottom-12 lg:left-auto left-12 flex flex-col justify-center lg:items-center gap-4">
         <h4 className="font-semibold text-2xl">
