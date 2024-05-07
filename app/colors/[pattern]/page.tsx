@@ -5,13 +5,7 @@ import Palette from "@/components/ui/palette"
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { Reorder } from "framer-motion";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { Gluten } from "next/font/google";
-
-const gluten = Gluten({
-  weight: "300",
-  subsets: ['latin']
-})
+import SubNavbar from "@/components/subnavbar";
 
 export default function Page({params}: {params: {pattern: string}}) {
 
@@ -58,11 +52,7 @@ useEffect(() => {
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
-    <div className={gluten.className+" flex flex-row items-center pl-5 pr-3 border-b-2 w-full bg-white z-10"}>
-      <p>Press </p>
-      <Image src="/spacebar.svg" alt="space" width={70} height={30}/>
-      <p>to generate a new palette</p>
-    </div>
+    <SubNavbar/>
 
     <div  id="div encima del reorder">
       <Reorder.Group 
