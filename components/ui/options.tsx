@@ -8,7 +8,7 @@ import { DragControls } from "framer-motion";
 const Options = ({color, colorIndex, colors, dragControls} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls}) => {
 
   return (
-    <div className="flex lg:flex-col flex-row-reverse justify-center gap-7">
+    <div className="flex lg:flex-col flex-row-reverse justify-center gap-6 mb-20">
       <DeleteColorOption color={color} colorIndex={colorIndex}/>
       <Info></Info>
       <MoveOption
