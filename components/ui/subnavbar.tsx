@@ -9,7 +9,7 @@ const gluten = Gluten({
 
 const SubNavbar = () => {
   return (
-    <div className={gluten.className+" flex flex-row items-center pl-5 pr-3 border-b-2 w-full bg-white z-10"}>
+    <div className={gluten.className+" flex flex-row items-center text-zinc-400 pl-5 pr-3 border-b-2 w-full bg-white z-10"}>
       <p>Press </p>
       <Image src="/spacebar.svg" alt="space" width={70} height={30}/>
       <p>to generate a new palette</p>
