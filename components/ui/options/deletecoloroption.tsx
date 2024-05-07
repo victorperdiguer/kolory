@@ -43,12 +43,12 @@ return (
             setOptionHover(false);
         }}
         className="rounded-lg aspect-square flex justify-center items-center p-1.5"
-        style={{ backgroundColor: optionHover ? hoverColor : "transparent" }} >
+        style={{ backgroundColor: optionHover && pattern.split('-').length > 2 ? hoverColor : "transparent" }} >
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger>
                     {" "}
-                    {pattern.split('-').length != 1 ? <Trash2 onClick={() => deleteColorHandler(colorIndex)} /> : null}
+                    {pattern.split('-').length > 2 ? <Trash2 onClick={() => deleteColorHandler(colorIndex)} /> : null}
                 </TooltipTrigger>
                 <TooltipContent>
                     <p>Delete color</p>
