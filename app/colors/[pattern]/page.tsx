@@ -5,7 +5,8 @@ import Palette from "@/components/ui/palette"
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { Reorder } from "framer-motion";
 import { useRouter } from "next/navigation";
-import SubNavbar from "@/components/subnavbar";
+import SubNavbar from "@/components/ui/subnavbar";
+import randomColor from "randomcolor";
 
 export default function Page({params}: {params: {pattern: string}}) {
 
@@ -27,7 +28,7 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
       newLockedColors = [...lockedColors, clickedColorPosition];
     }
     for (let i = 0; i < lockedColors.length-1; i++) {
-      console.log("testeando deleted", newLockedColors[i], clickedColorPosition)
+      // console.log("testeando deleted", newLockedColors[i], clickedColorPosition)
       if (newLockedColors[i] > clickedColorPosition) {
           newLockedColors[i]--;
       }
@@ -35,7 +36,7 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   }
   if (deleted === true) {
     for (let i = 0; i < lockedColors.length; i++) {
-      console.log("testeando deleted", lockedColors[i], clickedColorPosition)
+      // console.log("testeando deleted", lockedColors[i], clickedColorPosition)
       if (lockedColors[i] > clickedColorPosition) {
           lockedColors[i]--;
       }
@@ -44,14 +45,41 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   }
   setLockedColors(newLockedColors);
   sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
+  console.log("state variable", lockedColors)
+  console.log("session variable", sessionStorage)
 };
 
 useEffect(() => {
-  console.log("New color array", colors)
-}, [colors])
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.code === 'Space') {
+      console.log("space pressed")
+        const newColors = colors.map((color, colorIndex) => {
+            let newColor
+            if (lockedColors.includes(colorIndex)) {
+              newColor = color
+            }
+            else {
+              newColor = randomColor({hue: 'random', luminosity: 'random'}).replace("#", "");
+            }
+            return newColor
+        });
+      setColors(newColors);
+      const colorURL = newColors.join("-");
+      navigate.push(`/colors/${colorURL}`);
+    }
+  };
+
+
+  window.addEventListener('keydown', handleKeyDown);
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown);
+  };
+}, [lockedColors]);
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
+    <div>
     <SubNavbar/>
 
     <div  id="div encima del reorder">
@@ -68,7 +96,8 @@ useEffect(() => {
 
       </Reorder.Group>
     </div>
-
+    </div>
     </LockedColorsContext.Provider>
+    
   )
 }

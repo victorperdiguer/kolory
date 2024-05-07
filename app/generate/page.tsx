@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Image from "next/image";
 import randomColor from "randomcolor";
-import SubNavbar from "@/components/subnavbar";
+import SubNavbar from "@/components/ui/subnavbar";
 
 function Page() {
 
