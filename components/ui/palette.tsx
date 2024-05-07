@@ -52,7 +52,7 @@ const Palette = ({
   const newColorURL = () => {
     setTimeout(() => {
         navigate.push(`/colors/${colors.join("-").replaceAll("#", "")}`);
-    }, 500);
+    }, 1);
   }
 
   useEffect(() => {

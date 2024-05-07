@@ -28,7 +28,6 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
       newLockedColors = [...lockedColors, clickedColorPosition];
     }
     for (let i = 0; i < lockedColors.length-1; i++) {
-      // console.log("testeando deleted", newLockedColors[i], clickedColorPosition)
       if (newLockedColors[i] > clickedColorPosition) {
           newLockedColors[i]--;
       }
@@ -36,7 +35,6 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   }
   if (deleted === true) {
     for (let i = 0; i < lockedColors.length; i++) {
-      // console.log("testeando deleted", lockedColors[i], clickedColorPosition)
       if (lockedColors[i] > clickedColorPosition) {
           lockedColors[i]--;
       }
@@ -45,14 +43,12 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   }
   setLockedColors(newLockedColors);
   sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
-  console.log("state variable", lockedColors)
-  console.log("session variable", sessionStorage)
+
 };
 
 useEffect(() => {
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'Space') {
-      console.log("space pressed")
         const newColors = colors.map((color, colorIndex) => {
             let newColor
             if (lockedColors.includes(colorIndex)) {
@@ -85,7 +81,24 @@ useEffect(() => {
     <div  id="div encima del reorder">
       <Reorder.Group 
         values={colors}
-        onReorder={setColors}
+        onReorder={(newColors) => {
+          // Create a map of old index to new index
+          const indexMap = new Map();
+          newColors.forEach((color, newIndex) => {
+            const oldIndex = colors.indexOf(color);
+            indexMap.set(oldIndex, newIndex);
+          });
+
+          // Update lockedColors to reflect the new indices
+          console.log("old lockedColors", lockedColors)
+          const newLockedColors = lockedColors.map(oldIndex => indexMap.get(oldIndex));
+          console.log("new lockedColors", newLockedColors)
+          setLockedColors(newLockedColors);
+          sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
+
+          // Update colors
+          setColors(newColors);
+        }}
         axis="x"
         className="flex lg:flex-row flex-col"
         >
