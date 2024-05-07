@@ -61,13 +61,12 @@ const Palette = ({
 
   return (
     //cancer part --> make sure key and value are THE SAME as in the reorder group or shit will break
-      <Reorder.Item key={color} value={color} style={{ backgroundColor: "#"+color, height: "calc(100vh - 4rem", width: "100%" }} className={
+      <Reorder.Item key={color} value={color} style={{ backgroundColor: "#"+color, height: "calc(100vh - 6rem", width: "100%" }} className={
       "flex lg:flex-col flex-row-reverse justify-center items-center px-[5px] relative"}
     onMouseEnter={() => setPaletteHover(true)}
     onMouseLeave={() => setPaletteHover(false)}
     dragControls={dragControls}
     dragListener={false}
-    onDrag={() => console.log("moviendo!")}
     onDragTransitionEnd={() => newColorURL()}
     >
     <div 
