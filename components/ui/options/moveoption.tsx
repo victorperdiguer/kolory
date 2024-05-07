@@ -9,16 +9,17 @@ import {
 } from "../tooltip";
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { colord } from "colord";
-import { DragControls } from "framer-motion";
+import { motion, DragControls } from "framer-motion";
+import { useRouter } from "next/navigation";
 
-const MoveOption = ({ color, colorIndex, dragControls }: {color: string, colorIndex: number, dragControls: DragControls }) => {
+const MoveOption = ({ color, colorIndex, colors, dragControls }: {color: string, colorIndex: number, colors: string[], dragControls: DragControls }) => {
 
   const [optionHover, setOptionHover] = useState(false);
 
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
 
 return (
-    <div
+    <motion.div
         onMouseEnter={() => {
             setOptionHover(true);
         }}
@@ -42,7 +43,7 @@ return (
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
-    </div>
+    </motion.div>
 );
 };
 

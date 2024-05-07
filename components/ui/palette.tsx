@@ -7,7 +7,7 @@ import { Gluten } from "next/font/google";
 import Options from "./options";
 import { Reorder, useDragControls } from "framer-motion";
 import axios from "axios";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 extend([namesPlugin]);
 
@@ -25,7 +25,10 @@ const Palette = ({
   colors: string[];
   colorIndex: number;
 }) => {
-    const [colorName, setColorName] = useState<string>("");
+
+  const navigate = useRouter();
+
+  const [colorName, setColorName] = useState<string>("");
 
   async function getColorName() {
     try {
@@ -46,6 +49,12 @@ const Palette = ({
 
   const dragControls = useDragControls();
 
+  const newColorURL = () => {
+    setTimeout(() => {
+        navigate.push(`/colors/${colors.join("-").replaceAll("#", "")}`);
+    }, 500);
+  }
+
   useEffect(() => {
     getColorName();
   }, []);
@@ -58,6 +67,8 @@ const Palette = ({
     onMouseLeave={() => setPaletteHover(false)}
     dragControls={dragControls}
     dragListener={false}
+    onDrag={() => console.log("moviendo!")}
+    onDragTransitionEnd={() => newColorURL()}
     >
     <div 
       className={
@@ -65,14 +76,14 @@ const Palette = ({
         " " +"text-"+textColor
       }
     >
-      {paletteHover && <Options color={color} colorIndex={colorIndex} dragControls={dragControls}
+      {paletteHover && <Options color={color} colorIndex={colorIndex} dragControls={dragControls} colors={colors}
 ></Options>}
 
       <div className="absolute lg:bottom-12 lg:left-auto left-12 flex flex-col justify-center lg:items-center gap-4">
         <h4 className="font-semibold text-2xl">
           {color.toUpperCase()}
         </h4>
-        <h6 className={gluten.className + " " + "opacity-[0.7] transition duration-700 ease-in-out"}>
+        <h6 className={gluten.className + " " + "opacity-[0.7]"}>
           {colorName ? colorName : <span style={{color: '#'+color}}>.</span>}
         </h6>
       </div>

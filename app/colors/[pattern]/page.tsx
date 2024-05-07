@@ -1,15 +1,17 @@
 'use client'
-import React from "react"
+import React, { use } from "react"
 import { useState, useEffect } from "react"
 import Palette from "@/components/ui/palette"
 import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { Reorder } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function Page({params}: {params: {pattern: string}}) {
 
 let aux = sessionStorage.getItem('lockedColors') as string
 const initialLockedColors = JSON.parse(aux) as number[] || [];
 
+const navigate = useRouter();
 const [colors, setColors] = useState(params.pattern.split('-'))
 const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors as number[]);
 
@@ -43,7 +45,9 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
 };
 
-
+useEffect(() => {
+  console.log("New color array", colors)
+}, [colors])
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
@@ -53,7 +57,7 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
         values={colors}
         onReorder={setColors}
         axis="x"
-        className="flex lg:flex-row flex-col" 
+        className="flex lg:flex-row flex-col"
         >
 
       {colors.map((color: string, colorIndex: number) => (
