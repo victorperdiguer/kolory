@@ -20,9 +20,6 @@ const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors a
 // cancer code, don't even try to understand
 
 const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
-  console.log("clickedColorPosition", clickedColorPosition)
-  console.log("ON CLICK")
-  console.log("lockedColors in state", lockedColors, "lockedColors in session", JSON.parse(sessionStorage.getItem('lockedColors') as string))
   let newLockedColors = [] as number[];
   if (deleted !== true) {
     if (lockedColors.includes(clickedColorPosition)) {
@@ -41,8 +38,6 @@ const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
   }
   setLockedColors(newLockedColors);
   sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
-  console.log("POST CLICK")
-  console.log("lockedColors in state", lockedColors, "lockedColors in session", JSON.parse(sessionStorage.getItem('lockedColors') as string))
 };
 
 useEffect(() => {

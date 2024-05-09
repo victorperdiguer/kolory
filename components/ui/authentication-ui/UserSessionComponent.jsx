@@ -3,18 +3,24 @@
 import React from "react"
 import { Button } from "../button";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Avatar, AvatarImage, AvatarFallback } from "../avatar";
 
 
 const UserSessionComponent = (props) => {
   const {data: session} = useSession()
-  console.log(session)
+  const nameArray = session?.user?.name.split(' ')
+  const initials = nameArray ? nameArray.map(name => name.charAt(0)).join('') : ''
+  
 
 return (
     <div>
         {session?.user ? 
             <div className="flex justify-center items-center">
               <div>
-                  <img src={session.user.image || ''} alt="profile image" className="w-10 h-10 rounded-full cursor-pointer"/>
+              <Avatar>
+                <AvatarImage src={session.user.image} />
+                <AvatarFallback style={{backgroundColor: 'zinc', color: 'black'}}>{initials.substring(0,2).toUpperCase()}</AvatarFallback>
+                </Avatar>
               </div>
               <Button onClick={() => signOut()}>
                   Sign Out
