@@ -84,9 +84,7 @@ useEffect(() => {
           });
 
           // Update lockedColors to reflect the new indices
-          console.log("old lockedColors", lockedColors)
           const newLockedColors = lockedColors.map(oldIndex => indexMap.get(oldIndex));
-          console.log("new lockedColors", newLockedColors)
           setLockedColors(newLockedColors);
           sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
 
