@@ -36,13 +36,11 @@ const Palette = ({
   const dragControls = useDragControls();
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [colorsInPalette, setColorsInPalette] = useState<string[]>(colors);
-  const hoverColor = colord("#" + colorInstance).isLight()
-    ? colord("#" + colorInstance)
-        .darken(0.1)
-        .toHex()
-    : colord("#" + colorInstance)
-        .lighten(0.1)
-        .toHex();
+  const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
+  // shades
+  const [shades, setShades] = useState<string[]>([]);
+  const [shadeActive, setShadeActive] = useState(false);
+
 
   async function getColorName() {
     try {
@@ -79,6 +77,7 @@ const Palette = ({
     setShowColorPicker(false);
     newColorURL();
   };
+
   const clickRef = useClickOutside(onClickOutside);
 
   const newColorURL = () => {
@@ -90,6 +89,14 @@ const Palette = ({
   useEffect(() => {
     getColorName();
   }, []);
+
+  useEffect(() => {
+    getColorName();
+  }, [shadeActive])
+
+  const shadeHandler = () => {
+
+  }
 
   const parentRef = useRef<HTMLDivElement | null>(null);
 
@@ -127,6 +134,7 @@ const Palette = ({
             colorIndex={colorIndex}
             dragControls={dragControls}
             colors={colors}
+            shades={shadeActive}
           ></Options>
         )}
 
