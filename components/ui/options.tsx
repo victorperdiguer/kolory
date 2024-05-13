@@ -1,10 +1,11 @@
 import React from "react"
-import { LockOpen, Lock, Trash2, Heart, Grip, Layers, Info, Delete} from "lucide-react";
+import { Heart } from "lucide-react";
 import LockOption from "./options/lockoption";
 import DeleteColorOption from "./options/deletecoloroption";
 import MoveOption from "./options/moveoption";
 import { DragControls } from "framer-motion";
 import InfoOption from "./options/infooption";
+import ShadesOption from "./options/shadesoption";
 
 const Options = ({color, colorIndex, colors, dragControls} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls}) => {
 
@@ -17,7 +18,7 @@ const Options = ({color, colorIndex, colors, dragControls} : { color: string, co
         color={color} colorIndex={colorIndex} colors={colors}
       />
       <Heart></Heart>
-      <Layers></Layers>
+      <ShadesOption color={color} colorIndex={colorIndex}></ShadesOption>
       <LockOption color={color} colorIndex={colorIndex} />
     </div>
   )
