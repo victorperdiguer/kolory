@@ -23,8 +23,8 @@ export default function RootLayout({
       <body className={inter.className+" overflow-hidden"}>
         <Providers>
           <Navbar/>
-        </Providers>
         {children}
+        </Providers>
         </body>
     </html>
   );

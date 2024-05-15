@@ -9,7 +9,7 @@ import ShadesOption from "./options/shadesoption";
 import SaveColorOption from "./options/savecoloroption";
 import { SessionProvider } from "next-auth/react";
 
-const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShadeActive} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls, shadeActive: boolean, setShadeActive: Function}) => {
+const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShadeActive, isSaved, onToggleSave} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls, shadeActive: boolean, setShadeActive: Function, isSaved: boolean, onToggleSave: Function}) => {
 
   return (
     <div className="flex lg:flex-col flex-row-reverse justify-center gap-6 mb-20">
@@ -20,7 +20,7 @@ const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShade
         color={color} 
       />
       <SessionProvider>
-        <SaveColorOption color={color} />
+        <SaveColorOption color={color} isSaved={isSaved} onToggleSave={onToggleSave} />
       </SessionProvider>
       <ShadesOption color={color} shadeActive={shadeActive} setShadeActive={setShadeActive}></ShadesOption>
       <LockOption color={color} colorIndex={colorIndex} />
