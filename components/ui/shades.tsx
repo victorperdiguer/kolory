@@ -12,34 +12,41 @@ extend([a11yPlugin]);
 
 
 
-const Shades = ({color, colors}: {color: string, colors: string[]}) => {
+const Shades = ({color, colors, setColor, shadeActive, setShadeActive}: {color: string, colors: string[], setColor: (color: string) => void, shadeActive: boolean, setShadeActive: (active: boolean) => void}) => {
 
   const [hover, setHover] = useState<boolean[]>([]);
 
   const [shades, setShades] = useState<string[]>([]);
   
   const generateShades = () => {
-    const brightness = colord("#" + color).brightness();
-  
-    // Determine the number of tints and shades based on brightness
+    const baseColor = colord("#" + color);
+    const hsl = baseColor.toHsl();
     const totalVariants = 20;
-    const numShades = Math.round(totalVariants * brightness);
+    
+    // Determine the number of darks and lights based on lightness
+    const numShades = Math.round(totalVariants * (hsl.l / 100));
     const numTints = totalVariants - numShades;
-    console.log("brillo", brightness, "numShades", numShades, "numTints", numTints)
-    
-    // Generate tints and shades
-    const newTints = colord("#" + color).tints(numTints).map(tint => tint.toHex().replace("#", "")).reverse();
-    const newShades = colord("#" + color).shades(numShades).map(shade => shade.toHex().replace("#", ""));
-    console.log("Shades", newShades, "Tints", newTints)
 
-    
+    // Generate darker shades
+    const newShades = Array.from({ length: numShades }, (_, i) => {
+      const lightness = Math.max(hsl.l - (i + 1) * (hsl.l / numShades), 0);
+      return colord({ h: hsl.h, s: hsl.s, l: lightness }).toHex().replace("#", "");
+    });
+
+    // Generate lighter tints
+    const newTints = Array.from({ length: numTints }, (_, i) => {
+      const lightness = Math.min(hsl.l + (i + 1) * ((100 - hsl.l) / numTints), 100);
+      return colord({ h: hsl.h, s: hsl.s, l: lightness }).toHex().replace("#", "");
+    });
+
     // Combine tints and shades
-    const combinedVariants = Array.from(new Set([...newTints, ...newShades])).filter(color => color.length <= 6);
-    console.log("Final version", combinedVariants)
+    const combinedVariants = [...newTints.reverse(), colord("#" + color).toHex().replace("#", ""), ...newShades];
+    console.log("Shades", newShades, "Tints", newTints);
+
     // Set the new shades
     setShades(combinedVariants);
     setHover(new Array(combinedVariants.length).fill(false));
-  };    
+  };
 
   useEffect(() => {
     generateShades();
@@ -53,32 +60,38 @@ const Shades = ({color, colors}: {color: string, colors: string[]}) => {
     setHover(prevHover => prevHover.map((val, i) => i === index ? false : val));
   };
 
-return (
-  <div className="flex flex-col justify-start w-full">
-    {shades.length > 0 &&
-      shades.map((shade, shadeIndex) => (
-        <div
-          key={"container" + shadeIndex}
-          className="w-full"
-          style={{
-            backgroundColor: "#" + shade,
-          }}
-          onMouseEnter={() => handleMouseEnter(shadeIndex)}
-          onMouseLeave={() => handleMouseLeave(shadeIndex)}
-        >
-          <h6
-            key={"shade" + shadeIndex}
-            className={
-              "w-full text-center flex justify-center " +
-              (colord("#" + shade).isLight() ? "text-black" : "text-white")
-            }
+  const handleClick = (shade: string) => {
+    setColor(shade);
+    setShadeActive(false);
+  };
+
+  return (
+    <div className="flex flex-col justify-start w-full">
+      {shades.length > 0 &&
+        shades.map((shade, shadeIndex) => (
+          <div
+            key={"container" + shadeIndex}
+            className="w-full"
+            style={{
+              backgroundColor: "#" + shade,
+            }}
+            onMouseEnter={() => handleMouseEnter(shadeIndex)}
+            onMouseLeave={() => handleMouseLeave(shadeIndex)}
+            onClick={() => handleClick(shade)}
           >
-            {hover[shadeIndex] ? shade.toUpperCase() : shade == color ? <CheckCircle2/> : String.fromCharCode(160)}
-          </h6>
-        </div>
-      ))}
-  </div>
-);
+            <h6
+              key={"shade" + shadeIndex}
+              className={
+                "w-full text-center flex justify-center " +
+                (colord("#" + shade).isLight() ? "text-black" : "text-white")
+              }
+            >
+              {hover[shadeIndex] ? shade.toUpperCase() : shade == color ? <CheckCircle2/> : String.fromCharCode(160)}
+            </h6>
+          </div>
+        ))}
+    </div>
+  );
 };
 
 export default Shades;

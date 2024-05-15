@@ -38,8 +38,6 @@ const Palette = ({
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [colorsInPalette, setColorsInPalette] = useState<string[]>(colors);
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
-  // shades
-  const [shades, setShades] = useState<string[]>([]);
   const [shadeActive, setShadeActive] = useState(false);
 
 
@@ -63,6 +61,7 @@ const Palette = ({
   useEffect(() => {
     getColorName();
     setTextColor(colord("#" + colorInstance).isDark() ? "white" : "black");
+    handleSetColor(colorInstance);
   }, [colorInstance]);
 
   const handleSetColor = (newColor: string) => {
@@ -87,17 +86,9 @@ const Palette = ({
     }, 1);
   };
 
-  useEffect(() => {
-    getColorName();
-  }, []);
-
-  useEffect(() => {
-    console.log("Ha llegado a palette")
-  }, [shadeActive])
-
-  const shadeHandler = () => {
-    
-  }
+  useEffect (() => {
+    newColorURL();
+  }, [colorsInPalette])
 
   const parentRef = useRef<HTMLDivElement | null>(null);
 
@@ -188,7 +179,7 @@ const Palette = ({
       </div>}
 
       {shadeActive && 
-        <Shades color={colorInstance} colors={colorsInPalette}></Shades>
+        <Shades color={colorInstance} colors={colorsInPalette} setColor={setColorInstance} shadeActive={shadeActive} setShadeActive={setShadeActive}></Shades>
       }
       
     </Reorder.Item>
