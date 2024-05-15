@@ -4,6 +4,7 @@ import User from "@/models/User";
 
 export async function GET(req: NextRequest) {
   const email = req.nextUrl.searchParams.get("email");
+  console.log(req.nextUrl.searchParams)
   if (!email) {
     return NextResponse.json({ message: "Email query parameter is required" }, { status: 400 });
   }

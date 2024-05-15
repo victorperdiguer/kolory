@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import {
   Tooltip,
@@ -17,6 +17,8 @@ const SaveColorOption = ({ color }: { color: string }) => {
 
   const textColor = colord("#" + color).isDark() ? "white" : "black"
 
+  const [savedColors, setSavedColors] = useState<string[]>([]);
+
   const [optionHover, setOptionHover] = useState(false);
 
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
@@ -29,11 +31,28 @@ const SaveColorOption = ({ color }: { color: string }) => {
 
     try {
       const response = await axios.post('/api/color', { email: session?.user?.email, color });
-      console.log(response.data.message);
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    const fetchSavedColors = async () => {
+      if (!session) {
+        console.error("User not authenticated - effect");
+        return;
+      }
+
+      try {
+        const response = await axios.get(`/api/color?email=${session?.user?.email}`);
+        setSavedColors(response.data.savedColors);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchSavedColors();
+  }, [session])
 
   return (
       <div
@@ -50,9 +69,12 @@ const SaveColorOption = ({ color }: { color: string }) => {
               <Tooltip>
                   <TooltipTrigger>
                       {" "}
-                          <Heart 
-                          fill={textColor}
-                          onClick={() => saveColorHandler()} />
+                      {savedColors.includes(color) ? <Heart 
+                        fill={textColor}
+                        onClick={() => saveColorHandler()} /> : 
+                        <Heart
+                        onClick={() => saveColorHandler()} 
+                          />}
                   </TooltipTrigger>
                   <TooltipContent>
                       Save color
