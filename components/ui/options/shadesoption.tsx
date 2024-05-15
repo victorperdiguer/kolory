@@ -1,20 +1,15 @@
 import React from "react"
 import { colord } from "colord";
 import { useState } from "react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Layers } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "../tooltip";
 
-const ShadesOption = ({ color, colorIndex, shadeActive, setShadeActive }: { color: string, colorIndex: number, shadeActive: boolean, setShadeActive: Function }) => {
+const ShadesOption = ({ color, shadeActive, setShadeActive }: { color: string, shadeActive: boolean, setShadeActive: Function }) => {
 
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
 
   const [optionHover, setOptionHover] = useState(false);
 
-  const [activateShades, setActivateShades] = useState<boolean>(shadeActive);
-
-  const navigate = useRouter();
 
   const shadeActivationHandler = () => {
     console.log("Shade activation handler")

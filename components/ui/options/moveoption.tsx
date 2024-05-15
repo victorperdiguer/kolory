@@ -12,7 +12,7 @@ import { colord } from "colord";
 import { motion, DragControls } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const MoveOption = ({ color, colorIndex, colors, dragControls }: {color: string, colorIndex: number, colors: string[], dragControls: DragControls }) => {
+const MoveOption = ({ color, dragControls }: {color: string, dragControls: DragControls }) => {
 
   const [optionHover, setOptionHover] = useState(false);
 

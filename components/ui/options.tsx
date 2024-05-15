@@ -12,13 +12,13 @@ const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShade
   return (
     <div className="flex lg:flex-col flex-row-reverse justify-center gap-6 mb-20">
       <DeleteColorOption color={color} colorIndex={colorIndex}/>
-      <InfoOption color={color} colorIndex={colorIndex} colors={colors}/>
+      <InfoOption color={color} />
       <MoveOption
         dragControls={dragControls}
-        color={color} colorIndex={colorIndex} colors={colors}
+        color={color} 
       />
       <Heart></Heart>
-      <ShadesOption color={color} colorIndex={colorIndex} shadeActive={shadeActive} setShadeActive={setShadeActive}></ShadesOption>
+      <ShadesOption color={color} shadeActive={shadeActive} setShadeActive={setShadeActive}></ShadesOption>
       <LockOption color={color} colorIndex={colorIndex} />
     </div>
   )

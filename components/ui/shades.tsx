@@ -66,7 +66,9 @@ const Shades = ({color, colors, setColor, shadeActive, setShadeActive}: {color: 
   };
 
   return (
-    <div className="flex flex-col justify-start w-full">
+    <div 
+      className="flex flex-col justify-start w-full"
+      >
       {shades.length > 0 &&
         shades.map((shade, shadeIndex) => (
           <div
