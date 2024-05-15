@@ -5,20 +5,20 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Layers } from "lucide-react";
 import { Tooltip, TooltipProvider, TooltipContent, TooltipTrigger } from "../tooltip";
-import { set } from "mongoose";
 
-const ShadesOption = ({ color, colorIndex, shades }: { color: string, colorIndex: number, shades: boolean }) => {
+const ShadesOption = ({ color, colorIndex, shadeActive, setShadeActive }: { color: string, colorIndex: number, shadeActive: boolean, setShadeActive: Function }) => {
 
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
 
   const [optionHover, setOptionHover] = useState(false);
 
-  const [activateShades, setActivateShades] = useState<boolean>(false);
+  const [activateShades, setActivateShades] = useState<boolean>(shadeActive);
 
   const navigate = useRouter();
 
-  const shadeHandler = () => {
-    setActivateShades(!shades);
+  const shadeActivationHandler = () => {
+    console.log("Shade activation handler")
+    setShadeActive(!shadeActive);
   }
 
   return (
@@ -36,7 +36,7 @@ const ShadesOption = ({ color, colorIndex, shades }: { color: string, colorIndex
         <Tooltip>
           <TooltipTrigger>
             {" "}
-            <Layers onClick={() => shadeHandler()} />
+            <Layers onClick={() => shadeActivationHandler()} />
           </TooltipTrigger>
           <TooltipContent>
             <p>Change color shade</p>

@@ -10,6 +10,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import ReactGPicker from "react-gcolor-picker";
 import { useClickOutside } from "@/app/hooks/use-click-outside";
+import Shades from "./shades";
 
 extend([namesPlugin]);
 
@@ -91,11 +92,11 @@ const Palette = ({
   }, []);
 
   useEffect(() => {
-    getColorName();
+    console.log("Ha llegado a palette")
   }, [shadeActive])
 
   const shadeHandler = () => {
-
+    
   }
 
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -111,7 +112,7 @@ const Palette = ({
         width: "100%",
       }}
       className={
-        "flex lg:flex-col flex-row-reverse justify-center items-center px-[5px] relative"
+        "flex lg:flex-col flex-row-reverse items-center relative" + (shadeActive ? "justify-start" : "justify-center")
       }
       onMouseEnter={() => setPaletteHover(true)}
       onMouseLeave={() => setPaletteHover(false)}
@@ -120,12 +121,12 @@ const Palette = ({
       onDragTransitionEnd={() => newColorURL()}
       ref={parentRef}
     >
-      <div
+      {!shadeActive && <div
         className={
           "w-full lg:h-screen flex lg:flex-col flex-row-reverse justify-center items-center px-[5px] relative" +
           " " +
           "text-" +
-          textColor
+          textColor + " " + (shadeActive ? "hidden" : "")
         }
       >
         {paletteHover && (
@@ -134,7 +135,8 @@ const Palette = ({
             colorIndex={colorIndex}
             dragControls={dragControls}
             colors={colors}
-            shades={shadeActive}
+            shadeActive={shadeActive}
+            setShadeActive={setShadeActive}
           ></Options>
         )}
 
@@ -183,7 +185,12 @@ const Palette = ({
             )}
           </h6>
         </div>
-      </div>
+      </div>}
+
+      {shadeActive && 
+        <Shades color={colorInstance} colors={colorsInPalette}></Shades>
+      }
+      
     </Reorder.Item>
   );
 };

@@ -7,7 +7,7 @@ import { DragControls } from "framer-motion";
 import InfoOption from "./options/infooption";
 import ShadesOption from "./options/shadesoption";
 
-const Options = ({color, colorIndex, colors, dragControls, shades} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls, shades: boolean}) => {
+const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShadeActive} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls, shadeActive: boolean, setShadeActive: Function}) => {
 
   return (
     <div className="flex lg:flex-col flex-row-reverse justify-center gap-6 mb-20">
@@ -18,7 +18,7 @@ const Options = ({color, colorIndex, colors, dragControls, shades} : { color: st
         color={color} colorIndex={colorIndex} colors={colors}
       />
       <Heart></Heart>
-      <ShadesOption color={color} colorIndex={colorIndex} shades={shades}></ShadesOption>
+      <ShadesOption color={color} colorIndex={colorIndex} shadeActive={shadeActive} setShadeActive={setShadeActive}></ShadesOption>
       <LockOption color={color} colorIndex={colorIndex} />
     </div>
   )
