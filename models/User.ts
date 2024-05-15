@@ -5,7 +5,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   avatar?: string; // Optional field
-  savedColors: string[]; // Array of hex color codes
+  savedColors: string[];
   savedPalettes: string[][]; // Array of arrays of hex color codes
 }
 
@@ -28,7 +28,7 @@ const userSchema: Schema<IUser> = new Schema(
     savedColors: {
       type: [String],
       required: true,
-      default: [], // Default to an empty array
+      default: []
     },
     savedPalettes: {
       type: [[String]], // Array of arrays of strings

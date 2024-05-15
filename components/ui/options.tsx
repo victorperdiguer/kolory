@@ -6,6 +6,8 @@ import MoveOption from "./options/moveoption";
 import { DragControls } from "framer-motion";
 import InfoOption from "./options/infooption";
 import ShadesOption from "./options/shadesoption";
+import SaveColorOption from "./options/savecoloroption";
+import { SessionProvider } from "next-auth/react";
 
 const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShadeActive} : { color: string, colorIndex: number, colors: string[], dragControls: DragControls, shadeActive: boolean, setShadeActive: Function}) => {
 
@@ -17,7 +19,9 @@ const Options = ({color, colorIndex, colors, dragControls, shadeActive, setShade
         dragControls={dragControls}
         color={color} 
       />
-      <Heart></Heart>
+      <SessionProvider>
+        <SaveColorOption color={color} />
+      </SessionProvider>
       <ShadesOption color={color} shadeActive={shadeActive} setShadeActive={setShadeActive}></ShadesOption>
       <LockOption color={color} colorIndex={colorIndex} />
     </div>
