@@ -73,9 +73,10 @@ const Shades = ({color, colors, setColor, shadeActive, setShadeActive}: {color: 
         shades.map((shade, shadeIndex) => (
           <div
             key={"container" + shadeIndex}
-            className="w-full"
+            className="w-full flex justify-center items-center cursor-pointer"
             style={{
               backgroundColor: "#" + shade,
+              height: "calc((100vh - 6rem)/25)"
             }}
             onMouseEnter={() => handleMouseEnter(shadeIndex)}
             onMouseLeave={() => handleMouseLeave(shadeIndex)}
