@@ -18,7 +18,7 @@ const SubNavbar = () => {
       <Image src="/spacebar.svg" alt="space" width={70} height={30}/>
       <p>to generate a new palette</p>
     </div>
-    <div className="flex flex-row justify-center items-center gap-6">
+    <div className="flex flex-row justify-center items-center gap-2">
       <SavePalette/>
       <SharePalette/>
       <SideMenu/>
