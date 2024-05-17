@@ -7,8 +7,6 @@ import {
   TooltipTrigger,
 } from "../tooltip";
 import { colord } from "colord";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 
 const SaveColorOption = ({ color, isSaved, onToggleSave } : { color: string, isSaved: boolean, onToggleSave: Function}) => {
   const textColor = colord("#" + color).isDark() ? "white" : "black";
