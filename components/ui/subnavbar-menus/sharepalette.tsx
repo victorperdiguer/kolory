@@ -1,5 +1,5 @@
 import React from "react"
-import { Share2 } from "lucide-react";
+import { Share2, Link, Image, File} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -7,14 +7,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogFooter
 } from "../dialog";
 import { Button } from "../button";
-import { Input } from "../input";
-import { Label } from "../label";
-import { Textarea } from "../textarea";
 
-const SharePalette = () => {
+
+const SharePalette = ({params}: {params: {pattern: string}}) => {
   return (
     <div>
       <Dialog>
@@ -29,27 +26,21 @@ const SharePalette = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Share palette</DialogTitle>
-            <DialogDescription>
-              Write a name and a description for this palette.
-            </DialogDescription>
+            <div className="flex justify-between items-center pt-6">
+              <Button variant="noborder">
+                  <div className="pr-2"><Link /></div>
+                  <h1>Link</h1>
+              </Button>
+              <Button variant="noborder">
+                  <div className="pr-2"><Image /></div>
+                  <p>PNG</p>
+              </Button>
+              <Button variant="noborder">
+                  <div className="pr-2"><File /></div>
+                  <p>PDF</p>
+              </Button>
+            </div>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" defaultValue="" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">
-                Description
-              </Label>
-              <Textarea id="description" className="col-span-3" />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

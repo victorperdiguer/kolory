@@ -10,7 +10,7 @@ const gluten = Gluten({
   subsets: ['latin']
 })
 
-const SubNavbar = () => {
+const SubNavbar = ({params}: {params: {pattern: string}}) => {
   return (
     <div className="flex flex-row justify-between items-center pl-7 pr-5 border-b-2 w-full bg-white z-10">
     <div className={gluten.className+" flex flex-row items-center text-zinc-400"}>
@@ -19,8 +19,8 @@ const SubNavbar = () => {
       <p>to generate a new palette</p>
     </div>
     <div className="flex flex-row justify-center items-center gap-2">
-      <SavePalette/>
-      <SharePalette/>
+      <SavePalette params={params}/>
+      <SharePalette params={params}/>
       <SideMenu/>
     </div>
     </div>

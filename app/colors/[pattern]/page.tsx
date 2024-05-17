@@ -70,7 +70,7 @@ useEffect(() => {
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
     <div>
-    <SubNavbar/>
+    <SubNavbar params={params}/>
 
     <div  id="div encima del reorder">
       <Reorder.Group 
