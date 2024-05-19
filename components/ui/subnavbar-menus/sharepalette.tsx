@@ -12,7 +12,7 @@ import { Toast } from "../toast";
 import { useToast } from "../use-toast";
 import useCopy from "@/app/hooks/use-copy";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {toPng} from "html-to-image";
 
 
@@ -43,6 +43,25 @@ const SharePalette = ({params, targetRef, handleExportPdf}: {params: {pattern: s
     setOpen(false);
   };
 
+  const handleExportImage = useCallback(() => {
+    if (targetRef.current === null) {
+      return;
+    }
+
+    toPng(targetRef.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "palette.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    setOpen(false);
+  }, [targetRef, setOpen]);
+
   return (
     <div>
       <Dialog open={open} onOpenChange={() => setOpen(true)}>
@@ -63,7 +82,7 @@ const SharePalette = ({params, targetRef, handleExportPdf}: {params: {pattern: s
                   <div className="pr-2"><Link /></div>
                   <h1>Link</h1>
               </Button>
-              <Button variant="noborder">
+              <Button variant="noborder" onClick={handleExportImage}>
                   <div className="pr-2"><Image /></div>
                   <p>PNG</p>
               </Button>
