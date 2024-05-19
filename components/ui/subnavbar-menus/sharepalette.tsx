@@ -26,13 +26,11 @@ const SharePalette = ({params}: {params: {pattern: string}}) => {
     // TODO - add live url
     copy(pathname);
     toast({
-      title: "URL copied to clipboard",
+      title: "✅ URL copied to clipboard",
     });
 
     setOpen(false);
   };
-
-
 
   return (
     <div>

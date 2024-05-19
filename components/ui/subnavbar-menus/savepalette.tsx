@@ -19,7 +19,7 @@ const SavePalette = ({params}: {params: {pattern: string}}) => {
       const palette = params.pattern.split('-');
       await axios.post('/api/palette', { email: session?.user?.email, palette: palette });
       toast({
-        title: "Palette saved successfully!",
+        title: "✅ Palette saved successfully!",
       })
     } catch (error) {
       console.error(error);
