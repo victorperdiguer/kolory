@@ -13,10 +13,11 @@ import { useToast } from "../use-toast";
 import useCopy from "@/app/hooks/use-copy";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import {toPng} from "html-to-image";
 
 
 
-const SharePalette = ({params}: {params: {pattern: string}}) => {
+const SharePalette = ({params, targetRef, handleExportPdf}: {params: {pattern: string}, targetRef: React.MutableRefObject<any>, handleExportPdf: Function}) => {
   const [open, setOpen] = useState<boolean>(false);
   const { copy } = useCopy();
   const { toast } = useToast();
@@ -32,10 +33,20 @@ const SharePalette = ({params}: {params: {pattern: string}}) => {
     setOpen(false);
   };
 
+  const exportPdfHandler = () => {
+    handleExportPdf();
+
+    toast({
+      title: "✅ PDF exported successful",
+    });
+
+    setOpen(false);
+  };
+
   return (
     <div>
       <Dialog open={open} onOpenChange={() => setOpen(true)}>
-        <DialogTrigger asChild>
+        <DialogTrigger asChild> 
           <Button 
           variant="noborder"
           >
@@ -56,7 +67,7 @@ const SharePalette = ({params}: {params: {pattern: string}}) => {
                   <div className="pr-2"><Image /></div>
                   <p>PNG</p>
               </Button>
-              <Button variant="noborder">
+              <Button variant="noborder" onClick={exportPdfHandler}>
                   <div className="pr-2"><File /></div>
                   <p>PDF</p>
               </Button>

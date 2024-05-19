@@ -10,7 +10,7 @@ const gluten = Gluten({
   subsets: ['latin']
 })
 
-const SubNavbar = ({params}: {params: {pattern: string}}) => {
+const SubNavbar = ({params, targetRef, handleExportPdf}: {params: {pattern: string}, targetRef: React.MutableRefObject<any>, handleExportPdf: Function}) => {
   return (
     <div className="flex flex-row justify-between items-center pl-7 pr-5 border-b-2 w-full bg-white z-10">
     <div className={gluten.className+" flex flex-row items-center text-zinc-400"}>
@@ -20,7 +20,7 @@ const SubNavbar = ({params}: {params: {pattern: string}}) => {
     </div>
     <div className="flex flex-row justify-center items-center gap-2">
       <SavePalette params={params}/>
-      <SharePalette params={params}/>
+      <SharePalette params={params} targetRef={targetRef} handleExportPdf={handleExportPdf}/>
       <SideMenu/>
     </div>
     </div>

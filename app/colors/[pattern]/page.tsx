@@ -7,73 +7,82 @@ import { Reorder } from "framer-motion";
 import { useRouter } from "next/navigation";
 import SubNavbar from "@/components/ui/subnavbar";
 import randomColor from "randomcolor";
+import { usePDF } from "react-to-pdf";
+
 
 export default function Page({params}: {params: {pattern: string}}) {
 
-let aux = sessionStorage.getItem('lockedColors') as string
-const initialLockedColors = JSON.parse(aux) as number[] || [];
+  let aux = sessionStorage.getItem('lockedColors') as string
+  const initialLockedColors = JSON.parse(aux) as number[] || [];
 
-const navigate = useRouter();
-const [colors, setColors] = useState(params.pattern.split('-'))
-const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors as number[]);
+  const navigate = useRouter();
+  const [colors, setColors] = useState(params.pattern.split('-'))
+  const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors as number[]);
 
-// cancer code, don't even try to understand
+  const { toPDF, targetRef } = usePDF({
+    method: "save",
+    filename: "palettes.pdf",
+    page: { orientation: "landscape", format: "a5" },
+  });
 
-const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
-  let newLockedColors = [] as number[];
-  if (deleted !== true) {
-    if (lockedColors.includes(clickedColorPosition)) {
-      newLockedColors = lockedColors.filter((lockedColorPosition) => lockedColorPosition !== clickedColorPosition);
-    } else {
-      newLockedColors = [...lockedColors, clickedColorPosition];
-    }
-  }
-  if (deleted === true) {
-    for (let i = 0; i < lockedColors.length; i++) {
-      if (lockedColors[i] > clickedColorPosition) {
-          lockedColors[i]--;
+  // cancer code, don't even try to understand
+
+  const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
+    let newLockedColors = [] as number[];
+    if (deleted !== true) {
+      if (lockedColors.includes(clickedColorPosition)) {
+        newLockedColors = lockedColors.filter((lockedColorPosition) => lockedColorPosition !== clickedColorPosition);
+      } else {
+        newLockedColors = [...lockedColors, clickedColorPosition];
       }
     }
-    newLockedColors = lockedColors
-  }
-  setLockedColors(newLockedColors);
-  sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
-};
-
-useEffect(() => {
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.code === 'Space') {
-        const newColors = colors.map((color, colorIndex) => {
-            let newColor
-            if (lockedColors.includes(colorIndex)) {
-              newColor = color
-            }
-            else {
-              newColor = randomColor({hue: 'random', luminosity: 'random'}).replace("#", "");
-            }
-            return newColor
-        });
-      setColors(newColors);
-      const colorURL = newColors.join("-");
-      navigate.push(`/colors/${colorURL}`);
+    if (deleted === true) {
+      for (let i = 0; i < lockedColors.length; i++) {
+        if (lockedColors[i] > clickedColorPosition) {
+            lockedColors[i]--;
+        }
+      }
+      newLockedColors = lockedColors
     }
+    setLockedColors(newLockedColors);
+    sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
   };
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+          const newColors = colors.map((color, colorIndex) => {
+              let newColor
+              if (lockedColors.includes(colorIndex)) {
+                newColor = color
+              }
+              else {
+                newColor = randomColor({hue: 'random', luminosity: 'random'}).replace("#", "");
+              }
+              return newColor
+          });
+        setColors(newColors);
+        const colorURL = newColors.join("-");
+        navigate.push(`/colors/${colorURL}`);
+      }
+    };
 
-  window.addEventListener('keydown', handleKeyDown);
 
-  return () => {
-    window.removeEventListener('keydown', handleKeyDown);
-  };
-}, [lockedColors]);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [lockedColors]);
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
     <div>
-    <SubNavbar params={params}/>
+    <SubNavbar params={params} targetRef={targetRef} handleExportPdf={toPDF}/>
 
-    <div  id="div encima del reorder">
+    <div id="div encima del reorder">
       <Reorder.Group 
+        ref={targetRef}
         values={colors}
         onReorder={(newColors) => {
           // Create a map of old index to new index
