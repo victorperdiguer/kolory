@@ -19,14 +19,28 @@ const gluten = Gluten({
   subsets: ["latin"],
 });
 
+const AddColorButton = ({ onClick, parentWidth }: { onClick: () => void, parentWidth: number }) => (
+  <button
+    onClick={onClick}
+    className="bg-gray-200 rounded-full hover:bg-gray-300 absolute w-12 h-12 bg-red-300 transform -translate-y-1/2 z-100"
+    style={{
+      transform: `translateX(calc(${parentWidth/2}px))`,
+    }}
+  >
+    +
+  </button>
+);
+
 const Palette = ({
   color,
   colors,
   colorIndex,
+  addColorAtIndex
 }: {
   color: string;
   colors: string[];
   colorIndex: number;
+  addColorAtIndex: (index: number) => void;
 }) => {
   const navigate = useRouter();
   const { data: session, status } = useSession();
@@ -42,6 +56,7 @@ const Palette = ({
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();
   const [shadeActive, setShadeActive] = useState(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
+  const [parentWidth, setParentWidth] = useState(0);
 
   const handleSetColor = (newColor: string) => {
     newColor = newColor.replaceAll("#", "");
@@ -100,6 +115,13 @@ const Palette = ({
     handleSetColor(colorInstance);
   }, [colorInstance]);
 
+  useEffect(() => {
+    if (parentRef.current) {
+      setParentWidth(parentRef.current.offsetWidth);
+    }
+    console.log(parentWidth)
+  }, [parentRef.current?.offsetWidth]);
+
   const onToggleSave = async () => {
     if (!session) {
       console.error("User not authenticated");
@@ -141,7 +163,7 @@ const Palette = ({
       {!shadeActive && (
         <div
           className={
-            "w-full lg:h-screen flex lg:flex-col flex-row-reverse justify-center items-center px-[5px] relative" +
+            "w-full lg:h-screen flex lg:flex-col flex-row-reverse justify-center items-center relative" +
             " " +
             "text-" +
             textColor +
@@ -149,6 +171,9 @@ const Palette = ({
             (shadeActive ? "hidden" : "")
           }
         >
+          {colorIndex < colors.length - 1 && (
+            <AddColorButton onClick={() => addColorAtIndex(colorIndex)} parentWidth={parentWidth} />
+          )}
           {paletteHover && (
             <Options
               color={colorInstance}

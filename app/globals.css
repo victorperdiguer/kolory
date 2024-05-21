@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add this to your CSS file or a <style> tag in your component */
+.palette-container {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.palette {
+  flex: 1;
+}
+
+.add-color-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.palette-container:hover .add-color-button {
+  display: block;
+}
