@@ -131,6 +131,7 @@ const Palette = ({
     }
   };
 
+  //WHY IS IT RED UNDERLINED, I DONT KNOW, BUT IT WORKS
   const activateAddColorButton = (activation: boolean) => {
     animate(".addColorButton", {
       opacity: activation ? 1 : 0,
@@ -171,6 +172,11 @@ const Palette = ({
           ref={scope}
         >
           {colorIndex < colors.length - 1 && (
+
+
+            //TO DO --> Fix button hover only working on first half of the button
+
+
               <button
               onClick={() => addColorAtIndex(colorIndex)}
               onMouseEnter={() => activateAddColorButton(true)}
