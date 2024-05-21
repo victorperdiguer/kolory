@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Gluten } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { colord } from "colord";
 
 const gluten = Gluten({
   weight: "300",
@@ -55,7 +56,7 @@ const SideMenu = () => {
   }
     
   return (
-    <div>
+    <div className="p-3 flex-1 flex flex-col">
       <div className="flex flex-row justify-between p-3">
         <Button
           variant="noborder"
@@ -78,40 +79,52 @@ const SideMenu = () => {
           />
         </Button>
       </div>
-      <div className="p-3">
+      <div className="overflow-auto" style={{ height: "calc(100vh - 12rem" }}>
         {itemDisplay === "saved-palettes" && savedPalettes.length > 0 ? (
-          <div className="h-screen flex-1 overflow-auto">
+          <div className="overflow-auto" style={{ height: "30rem" }}>
             {savedPalettes.map((palette: string[], index: number) => (
-                <div
-                    key={index}
-                    className="mb-3 flex flex-row w-full justify-center m-auto cursor-pointer"
-                    onClick={() => {accessPalette(palette)}}
-                >
-                    {palette.map((color: string, index: number) => (
-                        <div
-                            key={index}
-                            style={{ backgroundColor: "#" + color }}
-                            className="flex-1 h-12" // flex-1 to take equal space, h-12 for height
-                        ></div>
-                    ))}
-                </div>
+              <div
+                key={index}
+                className="mb-3 flex flex-row w-full justify-center m-auto cursor-pointer"
+                onClick={() => {
+                  accessPalette(palette);
+                }}
+              >
+                {palette.map((color: string, colorIndex: number) => (
+                  <div
+                    key={colorIndex}
+                    style={{ backgroundColor: "#" + color }}
+                    className="flex-1 h-12"
+                  ></div>
+                ))}
+              </div>
             ))}
           </div>
         ) : null}
 
         {itemDisplay === "saved-palettes" && savedPalettes.length === 0 ? (
           <div className="p-3 flex flex-col justify-center gap-5 items-center">
-            <CircleOff color="#d1d1d1"/>
-            <p className={gluten.className + " " + "text-center"} style={{color: "#d1d1d1"}}>No saved palettes</p>
+            <CircleOff color="#d1d1d1" />
+            <p
+              className={gluten.className + " " + "text-center"}
+              style={{ color: "#d1d1d1" }}
+            >
+              No saved palettes
+            </p>
           </div>
         ) : null}
 
         {itemDisplay === "saved-colors" && savedColors.length > 0 ? (
-          <div>
+          <div >
             {savedColors.map((color: string, index: number) => (
-              <div key={index} className="p-3 flex flex-row justify-center items-center">
-                <Droplet fill={"#"+color} color={"#"+color}/>
-                <p className={gluten.className+" "+"mt-1"}>{color.toUpperCase()}</p>
+              <div
+                key={index}
+                className="p-3 flex flex-row justify-center items-center"
+              >
+                <Droplet fill={"#" + color} color={colord("#" + color).isLight() ? "black" : "#" + color} />
+                <p className={gluten.className + " " + "mt-1"}>
+                  {color.toUpperCase()}
+                </p>
               </div>
             ))}
           </div>
@@ -119,8 +132,13 @@ const SideMenu = () => {
 
         {itemDisplay === "saved-colors" && savedColors.length === 0 ? (
           <div className="p-3 flex flex-col justify-center gap-5 items-center">
-            <CircleOff color="#d1d1d1"/>
-            <p className={gluten.className + " " + "text-center"} style={{color: "#d1d1d1"}}>No saved colors</p>
+            <CircleOff color="#d1d1d1" />
+            <p
+              className={gluten.className + " " + "text-center"}
+              style={{ color: "#d1d1d1" }}
+            >
+              No saved colors
+            </p>
           </div>
         ) : null}
       </div>
