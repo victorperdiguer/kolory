@@ -1,31 +1,27 @@
 import React from "react"
-import { Menu } from "lucide-react";
 import { Button } from "../button";
-import { useEffect } from "react";
-import { useAnimate } from "framer-motion";
+import { useState } from "react";
+import { SwatchBook, Droplet } from "lucide-react";
+import axios from "axios";
 
+const SideMenu = () => {
 
-const SideMenu = ({showSideMenu, setShowSideMenu} : {showSideMenu: boolean, setShowSideMenu: Function}) => {
-
-  const [scope, animate] = useAnimate();
-
-  useEffect(() => {
-    animate(
-      ".menuicon",
-
-      {
-        rotate: showSideMenu ? 90 : 0,
-      }
-    );
-  }, [showSideMenu]);
+  const [itemDisplay, setItemDisplay] = useState("saved-palettes");
 
   return (
-    <div ref={scope}>
-      <Button variant="noborder"
-        onClick={() => {setShowSideMenu(!showSideMenu)}}
-        >
-          <Menu className="menuicon"/>
-      </Button>
+    <div>
+      <div className="flex flex-row justify-between p-3">
+          <Button variant="noborder"
+            onClick={() => {setItemDisplay("saved-palettes")}}
+            >
+            <SwatchBook color={itemDisplay === "saved-palettes" ? "black": "#d1d1d1"}/>
+          </Button>
+          <Button variant="noborder"
+            onClick={() => {setItemDisplay("saved-colors")}}
+            >
+            <Droplet color={itemDisplay === "saved-colors" ? "black": "#d1d1d1"}/>
+          </Button>
+      </div>
     </div>
   )
 };

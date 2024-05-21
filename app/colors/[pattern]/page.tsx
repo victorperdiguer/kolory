@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import SubNavbar from "@/components/ui/subnavbar";
 import randomColor from "randomcolor";
 import { usePDF } from "react-to-pdf";
+import SideMenu from "@/components/ui/subnavbar-menus/sidemenu";
 
 
 export default function Page({params}: {params: {pattern: string}}) {
@@ -78,41 +79,58 @@ export default function Page({params}: {params: {pattern: string}}) {
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
-    <div>
-    <SubNavbar params={params} targetRef={targetRef} handleExportPdf={toPDF} showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
+      <div>
+        <SubNavbar
+          params={params}
+          targetRef={targetRef}
+          handleExportPdf={toPDF}
+          showSideMenu={showSideMenu}
+          setShowSideMenu={setShowSideMenu}
+        />
 
-    <div id="div encima del reorder">
-      <Reorder.Group 
-        ref={targetRef}
-        values={colors}
-        onReorder={(newColors) => {
-          // Create a map of old index to new index
-          const indexMap = new Map();
-          newColors.forEach((color, newIndex) => {
-            const oldIndex = colors.indexOf(color);
-            indexMap.set(oldIndex, newIndex);
-          });
+        <div id="div encima del reorder">
+          <Reorder.Group
+            ref={targetRef}
+            values={colors}
+            onReorder={(newColors) => {
+              // Create a map of old index to new index
+              const indexMap = new Map();
+              newColors.forEach((color, newIndex) => {
+                const oldIndex = colors.indexOf(color);
+                indexMap.set(oldIndex, newIndex);
+              });
 
-          // Update lockedColors to reflect the new indices
-          const newLockedColors = lockedColors.map(oldIndex => indexMap.get(oldIndex));
-          setLockedColors(newLockedColors);
-          sessionStorage.setItem('lockedColors', JSON.stringify(newLockedColors));
+              // Update lockedColors to reflect the new indices
+              const newLockedColors = lockedColors.map((oldIndex) =>
+                indexMap.get(oldIndex)
+              );
+              setLockedColors(newLockedColors);
+              sessionStorage.setItem(
+                "lockedColors",
+                JSON.stringify(newLockedColors)
+              );
 
-          // Update colors
-          setColors(newColors);
-        }}
-        axis="x"
-        className="flex lg:flex-row flex-col"
-        >
-
-      {colors.map((color: string, colorIndex: number) => (
-        <Palette key={color} color={color} colors={colors} colorIndex={colorIndex} />
-      ))}
-
-      </Reorder.Group>
-    </div>
-    </div>
+              // Update colors
+              setColors(newColors);
+            }}
+            axis="x"
+            className="flex lg:flex-row flex-col"
+          >
+            {colors.map((color: string, colorIndex: number) => (
+              <Palette
+                key={color}
+                color={color}
+                colors={colors}
+                colorIndex={colorIndex}
+              />
+            ))}
+            
+            {showSideMenu ? (
+              <SideMenu />
+            ) : null}
+          </Reorder.Group>
+        </div>
+      </div>
     </LockedColorsContext.Provider>
-    
-  )
+  );
 }

@@ -1,10 +1,9 @@
 import React from "react"
 import Image from "next/image"
 import { Gluten } from "next/font/google";
-import SideMenu from "./subnavbar-menus/sidemenu";
+import SideMenuIcon from "./subnavbar-menus/sidemenuicon";
 import SavePalette from "./subnavbar-menus/savepalette";
 import SharePalette from "./subnavbar-menus/sharepalette";
-import { useState } from "react";
 
 const gluten = Gluten({
   weight: "300",
@@ -24,7 +23,7 @@ const SubNavbar = ({params, targetRef, handleExportPdf, showSideMenu, setShowSid
     <div className="flex flex-row justify-center items-center gap-2">
       <SavePalette params={params}/>
       <SharePalette params={params} targetRef={targetRef} handleExportPdf={handleExportPdf}/>
-      <SideMenu showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
+      <SideMenuIcon showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
     </div>
     </div>
   )
