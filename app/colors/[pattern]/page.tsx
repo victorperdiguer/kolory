@@ -141,7 +141,6 @@ export default function Page({ params }: { params: { pattern: string } }) {
             className="flex lg:flex-row flex-col"
           >
             {colors.map((color: string, colorIndex: number) => (
-              <React.Fragment key={colorIndex}>
                 <Palette
                   key={color}
                   color={color}
@@ -149,7 +148,6 @@ export default function Page({ params }: { params: { pattern: string } }) {
                   colorIndex={colorIndex}
                   addColorAtIndex={addColorAtIndex}
                 />
-              </React.Fragment>
             ))}
 
             {showSideMenu ? (
