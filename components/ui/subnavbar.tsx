@@ -4,13 +4,16 @@ import { Gluten } from "next/font/google";
 import SideMenu from "./subnavbar-menus/sidemenu";
 import SavePalette from "./subnavbar-menus/savepalette";
 import SharePalette from "./subnavbar-menus/sharepalette";
+import { useState } from "react";
 
 const gluten = Gluten({
   weight: "300",
   subsets: ['latin']
 })
 
-const SubNavbar = ({params, targetRef, handleExportPdf}: {params: {pattern: string}, targetRef: React.MutableRefObject<any>, handleExportPdf: Function}) => {
+const SubNavbar = ({params, targetRef, handleExportPdf, showSideMenu, setShowSideMenu}: {params: {pattern: string}, targetRef: React.MutableRefObject<any>, handleExportPdf: Function, showSideMenu: boolean, setShowSideMenu: Function}) => {
+
+
   return (
     <div className="flex flex-row justify-between items-center pl-7 pr-5 border-b-2 w-full bg-white z-10">
     <div className={gluten.className+" flex flex-row items-center text-zinc-400"}>
@@ -21,7 +24,7 @@ const SubNavbar = ({params, targetRef, handleExportPdf}: {params: {pattern: stri
     <div className="flex flex-row justify-center items-center gap-2">
       <SavePalette params={params}/>
       <SharePalette params={params} targetRef={targetRef} handleExportPdf={handleExportPdf}/>
-      <SideMenu/>
+      <SideMenu showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
     </div>
     </div>
   )

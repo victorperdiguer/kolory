@@ -64,7 +64,7 @@ const SharePalette = ({params, targetRef, handleExportPdf}: {params: {pattern: s
 
   return (
     <div>
-      <Dialog open={open} onOpenChange={() => setOpen(true)}>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild> 
           <Button 
           variant="noborder"

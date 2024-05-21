@@ -18,6 +18,7 @@ export default function Page({params}: {params: {pattern: string}}) {
   const navigate = useRouter();
   const [colors, setColors] = useState(params.pattern.split('-'))
   const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors as number[]);
+  const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
 
   const { toPDF, targetRef } = usePDF({
     method: "save",
@@ -78,7 +79,7 @@ export default function Page({params}: {params: {pattern: string}}) {
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>
     <div>
-    <SubNavbar params={params} targetRef={targetRef} handleExportPdf={toPDF}/>
+    <SubNavbar params={params} targetRef={targetRef} handleExportPdf={toPDF} showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
 
     <div id="div encima del reorder">
       <Reorder.Group 
