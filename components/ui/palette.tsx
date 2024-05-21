@@ -11,6 +11,8 @@ import ReactGPicker from "react-gcolor-picker";
 import { useClickOutside } from "@/app/hooks/use-click-outside";
 import Shades from "./shades";
 import { useSession } from "next-auth/react";
+import { PlusCircle } from "lucide-react";
+import { useAnimate } from "framer-motion";
 
 extend([namesPlugin]);
 
@@ -18,18 +20,6 @@ const gluten = Gluten({
   weight: "200",
   subsets: ["latin"],
 });
-
-const AddColorButton = ({ onClick, parentWidth }: { onClick: () => void, parentWidth: number }) => (
-  <button
-    onClick={onClick}
-    className="bg-gray-200 rounded-full hover:bg-gray-300 absolute w-12 h-12 bg-red-300 transform -translate-y-1/2 z-100"
-    style={{
-      transform: `translateX(calc(${parentWidth/2}px))`,
-    }}
-  >
-    +
-  </button>
-);
 
 const Palette = ({
   color,
@@ -57,6 +47,7 @@ const Palette = ({
   const [shadeActive, setShadeActive] = useState(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
   const [parentWidth, setParentWidth] = useState(0);
+  const [scope, animate] = useAnimate()
 
   const handleSetColor = (newColor: string) => {
     newColor = newColor.replaceAll("#", "");
@@ -140,6 +131,13 @@ const Palette = ({
     }
   };
 
+  const activateAddColorButton = (activation: boolean) => {
+    animate(".addColorButton", {
+      opacity: activation ? 1 : 0,
+      duration: activation ? 0.1 : 0.4,
+    });
+  };
+
   return (
     <Reorder.Item
       key={colorInstance}
@@ -170,9 +168,20 @@ const Palette = ({
             " " +
             (shadeActive ? "hidden" : "")
           }
+          ref={scope}
         >
           {colorIndex < colors.length - 1 && (
-            <AddColorButton onClick={() => addColorAtIndex(colorIndex)} parentWidth={parentWidth} />
+              <button
+              onClick={() => addColorAtIndex(colorIndex)}
+              onMouseEnter={() => activateAddColorButton(true)}
+              onMouseLeave={() => activateAddColorButton(false)}
+              className="bg-white rounded-full absolute w-10 h-10 transform -translate-y-1/2 z-100 flex justify-center items-center opacity-0 addColorButton"
+              style={{
+                transform: `translateX(calc(${parentWidth/2}px))`,
+              }}
+            >
+              <PlusCircle color="black"/>
+            </button>
           )}
           {paletteHover && (
             <Options
