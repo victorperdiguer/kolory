@@ -131,12 +131,13 @@ const Palette = ({
     }
   };
 
-  //WHY IS IT RED UNDERLINED, I DONT KNOW, BUT IT WORKS
   const activateAddColorButton = (activation: boolean) => {
-    animate(".addColorButton", {
-      opacity: activation ? 1 : 0,
-      duration: activation ? 0.1 : 0.4,
-    });
+    animate(
+      ".addColorButton",
+      {
+        opacity: activation ? 1 : 0,
+      }
+    );
   };
 
   return (
