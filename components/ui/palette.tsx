@@ -13,6 +13,7 @@ import Shades from "./shades";
 import { useSession } from "next-auth/react";
 import { PlusCircle } from "lucide-react";
 import { useAnimate } from "framer-motion";
+import { AlertSignIn } from "./authentication-ui/alertsignin";
 
 extend([namesPlugin]);
 
@@ -48,6 +49,8 @@ const Palette = ({
   const parentRef = useRef<HTMLDivElement | null>(null);
   const [parentWidth, setParentWidth] = useState(0);
   const [scope, animate] = useAnimate()
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
 
   const handleSetColor = (newColor: string) => {
     newColor = newColor.replaceAll("#", "");
@@ -116,6 +119,7 @@ const Palette = ({
   const onToggleSave = async () => {
     if (!session) {
       console.error("User not authenticated");
+      setShowAlert(true);
       return;
     }
 
@@ -266,6 +270,9 @@ const Palette = ({
           setShadeActive={setShadeActive}
         />
       )}
+
+      {showAlert && <AlertSignIn showAlert={showAlert} setShowAlert={setShowAlert}/>}
+
     </Reorder.Item>
   );
 };

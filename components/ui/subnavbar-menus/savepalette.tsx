@@ -1,18 +1,22 @@
-import React from "react"
+import React, { use } from "react"
 import { Heart } from "lucide-react";
 import { useToast } from "../use-toast";
 import { Button } from "../button";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { AlertSignIn } from "../authentication-ui/alertsignin";
+import { useState } from "react";
 
 const SavePalette = ({params}: {params: {pattern: string}}) => {
   const { toast } = useToast()
   const { data: session, status } = useSession();
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const onToggleSave = async () => {
     if (!session) {
       console.error("User not authenticated");
-      return;
+      setShowAlert(true);
+      return
     }
 
     try {
@@ -36,6 +40,7 @@ const SavePalette = ({params}: {params: {pattern: string}}) => {
         </div>
         <p>Save</p>
       </Button>
+      {showAlert && <AlertSignIn showAlert={showAlert} setShowAlert={setShowAlert}/>}
     </div>
   );
 };
