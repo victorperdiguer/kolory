@@ -150,7 +150,7 @@ const Palette = ({
         width: "100%",
       }}
       className={
-        "flex lg:flex-col flex-row-reverse items-center relative" +
+        "flex lg:flex-col flex-row-reverse items-center relative -z-1 " +
         (shadeActive ? "justify-start" : "justify-center")
       }
       onMouseEnter={() => setPaletteHover(true)}
@@ -182,12 +182,12 @@ const Palette = ({
               onClick={() => addColorAtIndex(colorIndex)}
               onMouseEnter={() => activateAddColorButton(true)}
               onMouseLeave={() => activateAddColorButton(false)}
-              className="bg-white rounded-full absolute w-10 h-10 transform -translate-y-1/2 z-100 flex justify-center items-center opacity-0 addColorButton"
+              className="bg-white rounded-full absolute z-100 flex z-20 translate-y-full justify-center opacity-0 addColorButton p-3 m-5"
               style={{
                 transform: `translateX(calc(${parentWidth/2}px))`,
               }}
             >
-              <PlusCircle color="black"/>
+              <PlusCircle color="black" className="z-100"/>
             </button>
           )}
           {paletteHover && (
