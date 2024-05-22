@@ -11,6 +11,9 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
     })
   ],
+  pages: {
+    signIn: '/auth/signin',
+  },
   callbacks: {
     async signIn({user, account, profile}): Promise<string | boolean> {
         if (account?.provider === 'google'){
