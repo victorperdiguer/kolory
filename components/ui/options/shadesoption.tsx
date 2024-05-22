@@ -12,7 +12,6 @@ const ShadesOption = ({ color, shadeActive, setShadeActive }: { color: string, s
 
 
   const shadeActivationHandler = () => {
-    console.log("Shade activation handler")
     setShadeActive(!shadeActive);
   }
 

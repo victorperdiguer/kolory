@@ -113,7 +113,6 @@ const Palette = ({
     if (parentRef.current) {
       setParentWidth(parentRef.current.offsetWidth);
     }
-    console.log(parentWidth)
   }, [parentRef.current?.offsetWidth]);
 
   const onToggleSave = async () => {

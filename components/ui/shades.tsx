@@ -41,7 +41,6 @@ const Shades = ({color, colors, setColor, shadeActive, setShadeActive}: {color: 
 
     // Combine tints and shades
     const combinedVariants = [...newTints.reverse(), colord("#" + color).toHex().replace("#", ""), ...newShades];
-    console.log("Shades", newShades, "Tints", newTints);
 
     // Set the new shades
     setShades(combinedVariants);

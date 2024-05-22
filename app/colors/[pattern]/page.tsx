@@ -47,14 +47,26 @@ export default function Page({ params }: { params: { pattern: string } }) {
     page: { orientation: "landscape", format: "a5" },
   });
 
-  const handleLockColor = (clickedColorPosition: number, deleted?: boolean) => {
+  const handleLockColor = (clickedColorPosition: number, deleted?: boolean, colorAdded?: boolean) => {
     let newLockedColors = [] as number[];
     if (deleted !== true) {
-      if (lockedColors.includes(clickedColorPosition)) {
-        newLockedColors = lockedColors.filter((lockedColorPosition) => lockedColorPosition !== clickedColorPosition);
+      if (colorAdded === true) {
+        for (let i = 0; i < lockedColors.length; i++) {
+          if (lockedColors[i] > clickedColorPosition) {
+            lockedColors[i]++;
+          }
+        }
+        newLockedColors = lockedColors
       } else {
-        newLockedColors = [...lockedColors, clickedColorPosition];
+        if (lockedColors.includes(clickedColorPosition)) {
+          newLockedColors = lockedColors.filter((lockedColorPosition) => lockedColorPosition !== clickedColorPosition);
+        } else {
+          newLockedColors = [...lockedColors, clickedColorPosition];
+        }
       }
+
+
+
     }
     if (deleted === true) {
       for (let i = 0; i < lockedColors.length; i++) {
@@ -74,6 +86,7 @@ export default function Page({ params }: { params: { pattern: string } }) {
     const newColor = averageColor(color1, color2);
     const newColors = [...colors.slice(0, index + 1), newColor, ...colors.slice(index + 1)];
     setColors(newColors);
+    handleLockColor(index, false, true);
     const colorURL = newColors.join("-");
     navigate.push(`/colors/${colorURL}`);
   };
