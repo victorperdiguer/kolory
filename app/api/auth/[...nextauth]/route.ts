@@ -22,7 +22,7 @@ const handler = NextAuth({
             await connectMongoDB()
             const userExists = await User.findOne({ email })
             if (!userExists) {
-              const url = 'http://localhost:3000/api/user'
+              const url = process.env.APP_URL+'/api/user'
               const data = { name, email }
               const res = await axios.post(url, data, {
                 headers: {

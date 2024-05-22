@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "../dialog";
 import { Button } from "../button";
-import { Toast } from "../toast";
 import { useToast } from "../use-toast";
 import useCopy from "@/app/hooks/use-copy";
 import { usePathname } from "next/navigation";
@@ -17,7 +16,7 @@ import {toPng} from "html-to-image";
 
 
 
-const SharePalette = ({params, targetRef, handleExportPdf}: {params: {pattern: string}, targetRef: React.MutableRefObject<any>, handleExportPdf: Function}) => {
+const SharePalette = ({targetRef, handleExportPdf}: { targetRef: React.MutableRefObject<any>, handleExportPdf: Function}) => {
   const [open, setOpen] = useState<boolean>(false);
   const { copy } = useCopy();
   const { toast } = useToast();

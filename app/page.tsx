@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 import LandingPalette from "@/components/ui/landingpalette";
 import { Gluten } from "next/font/google";
 

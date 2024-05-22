@@ -1,4 +1,4 @@
-import React, { use } from "react"
+import React from "react"
 import { Heart } from "lucide-react";
 import { useToast } from "../use-toast";
 import { Button } from "../button";

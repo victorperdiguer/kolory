@@ -263,9 +263,7 @@ const Palette = ({
       {shadeActive && (
         <Shades
           color={colorInstance}
-          colors={colorsInPalette}
           setColor={setColorInstance}
-          shadeActive={shadeActive}
           setShadeActive={setShadeActive}
         />
       )}

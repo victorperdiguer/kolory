@@ -1,4 +1,4 @@
-import React, { ReactHTMLElement ,  } from "react";
+import React from "react";
 
 export const useClickOutside = (callback: () => void) => {
   const ref = React.useRef<HTMLDivElement | null>(null);

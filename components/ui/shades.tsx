@@ -12,7 +12,7 @@ extend([a11yPlugin]);
 
 
 
-const Shades = ({color, colors, setColor, shadeActive, setShadeActive}: {color: string, colors: string[], setColor: (color: string) => void, shadeActive: boolean, setShadeActive: (active: boolean) => void}) => {
+const Shades = ({color, setColor, setShadeActive}: {color: string, setColor: (color: string) => void, setShadeActive: (active: boolean) => void}) => {
 
   const [hover, setHover] = useState<boolean[]>([]);
 

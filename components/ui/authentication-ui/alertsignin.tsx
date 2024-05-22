@@ -17,7 +17,7 @@ export function AlertSignIn({showAlert, setShowAlert}: {showAlert: boolean, setS
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Account login required</AlertDialogTitle>
+          <AlertDialogTitle>Login to use save features</AlertDialogTitle>
           <AlertDialogDescription>
             Saving colors and palettes requires an account.
             <br></br>

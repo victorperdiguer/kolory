@@ -1,5 +1,5 @@
-import React, { use } from "react";
-import { useState, useContext } from "react";
+import React from "react";
+import { useState } from "react";
 import { Grip } from "lucide-react";
 import {
   Tooltip,
@@ -7,10 +7,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "../tooltip";
-import { LockedColorsContext } from "@/lib/lockedColorsContext";
 import { colord } from "colord";
 import { motion, DragControls } from "framer-motion";
-import { useRouter } from "next/navigation";
 
 const MoveOption = ({ color, dragControls }: {color: string, dragControls: DragControls }) => {
 

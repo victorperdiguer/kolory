@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../popover";
 import { Label } from "../label";
 import { Input } from "../input";
 
-const InfoOption = ({ color}: {color: string}) => {
+const InfoOption = ({ color }: {color: string}) => {
   
   const [optionHover, setOptionHover] = useState(false);
   const hoverColor = colord("#"+color).isLight() ? colord("#"+color).darken(0.1).toHex() : colord("#"+color).lighten(0.1).toHex();

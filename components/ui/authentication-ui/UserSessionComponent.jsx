@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"; // Adjust the import path accor
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"; // Adjust the import path according to your project structure
 
-const UserSessionComponent = (props) => {
+const UserSessionComponent = () => {
   const { data: session } = useSession();
   const nameArray = session?.user?.name.split(" ");
   const initials = nameArray ? nameArray.map(name => name.charAt(0)).join("") : "";

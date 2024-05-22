@@ -22,7 +22,7 @@ const SubNavbar = ({params, targetRef, handleExportPdf, showSideMenu, setShowSid
     </div>
     <div className="flex flex-row justify-center items-center gap-2">
       <SavePalette params={params}/>
-      <SharePalette params={params} targetRef={targetRef} handleExportPdf={handleExportPdf}/>
+      <SharePalette targetRef={targetRef} handleExportPdf={handleExportPdf}/>
       <SideMenuIcon showSideMenu={showSideMenu} setShowSideMenu={setShowSideMenu}/>
     </div>
     </div>
