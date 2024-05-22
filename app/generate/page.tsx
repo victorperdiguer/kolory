@@ -22,7 +22,6 @@ function Page() {
 
   return (
     <div>
-      <SubNavbar/>
       <div className="h-screen bg-white w-screen flex justify-center items-center" style={{height: 'calc(100vh - 4rem'}}>
         <Image src="/kolorylogo.svg" alt="logo" width={100} height={100} className="animate-spin rounded-full"/>
       </div>
