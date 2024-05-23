@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import Image from "next/image";
-import randomColor from "randomcolor";
+import { coolPalettes } from "@/lib/coolpalettes";
 
 function Page() {
 
@@ -11,7 +11,8 @@ function Page() {
 
   const navigate = useRouter();
 
-  const colorURL = randomColor({hue: 'random', count: 5, luminosity: 'random'}).join("-").replaceAll("#", "");
+  const randomIndex = Math.floor(Math.random() * coolPalettes.length);
+  const colorURL = coolPalettes[randomIndex].join("-").replaceAll("#", "");
 
   useEffect(() => {
     setTimeout(() => {

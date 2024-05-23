@@ -4,6 +4,7 @@ import React from "react"
 import { useEffect, useState } from 'react';
 import {motion, useAnimation} from 'framer-motion';
 import randomColor from 'randomcolor';
+import { coolPalettes } from "@/lib/coolpalettes";
 
 const paths = [
   "M482.8,266.365l-324,187.6h300.4c19.6,0,34.4-16,34.4-35.6v-125.2 C494,282.765,490.8,273.165,482.8,266.365z",
@@ -29,7 +30,10 @@ const LandingPalette = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setColors(colors => randomColor({hue: 'random',count: 9, luminosity: 'random'}));
+      const randomIndex = Math.floor(Math.random() * coolPalettes.length);
+      const randomIndex2 = Math.floor(Math.random() * coolPalettes.length);
+      const newColors = coolPalettes[randomIndex].concat(coolPalettes[randomIndex2]);
+      setColors(newColors);
     }, 4000);
     return () => clearInterval(intervalId);
   }, []);

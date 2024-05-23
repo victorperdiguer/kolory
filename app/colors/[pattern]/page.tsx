@@ -8,6 +8,7 @@ import SubNavbar from "@/components/ui/subnavbar";
 import randomColor from "randomcolor";
 import { usePDF } from "react-to-pdf";
 import SideMenu from "@/components/ui/subnavbar-menus/sidemenu";
+import { coolPalettes } from "@/lib/coolpalettes";
 
 const hexToRgb = (hex: string) => {
   const bigint = parseInt(hex, 16);
@@ -94,19 +95,40 @@ export default function Page({ params }: { params: { pattern: string } }) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'Space') {
-        const newColors = colors.map((color, colorIndex) => {
-          let newColor;
-          if (lockedColors.includes(colorIndex)) {
-            newColor = color;
-          }
-          else {
-            newColor = randomColor({ hue: 'random', luminosity: 'random' }).replace("#", "");
-          }
-          return newColor;
-        });
-        setColors(newColors);
-        const colorURL = newColors.join("-");
-        navigate.push(`/colors/${colorURL}`);
+        const randomGeneration = Math.random() < 0.5;
+        let newColor;
+        if (randomGeneration) {
+          const newColors = colors.map((color, colorIndex) => {
+            if (lockedColors.includes(colorIndex)) {
+              newColor = color;
+            }
+            else {
+              newColor = randomColor({ hue: 'random', luminosity: 'random' }).replace("#", "");
+            }
+            return newColor;
+          }); 
+          setColors(newColors);
+          const colorURL = newColors.join("-");
+          navigate.push(`/colors/${colorURL}`);
+        } else {
+          const randomCoolPalette = Math.floor(Math.random() * coolPalettes.length);
+          const newColors = colors.map((color, colorIndex) => {
+            if (lockedColors.includes(colorIndex)) {
+              newColor = color;
+            }
+            else {
+              if (colorIndex > coolPalettes[randomCoolPalette].length - 1) {
+                newColor = randomColor({ hue: 'random', luminosity: 'random' }).replace("#", "");
+              } else {
+                newColor = coolPalettes[randomCoolPalette][colorIndex].replace("#", "");
+              }
+            }
+            return newColor;
+          });
+          setColors(newColors);
+          const colorURL = newColors.join("-");
+          navigate.push(`/colors/${colorURL}`);
+        }
       }
     };
 
