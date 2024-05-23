@@ -40,7 +40,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       message: "Palette saved successfully",
       palette: palette,
-      email: email
+      email: email,
+      action: "save"
     }, { status: 201 });
   } else {
     user.savedPalettes = user.savedPalettes.filter(savedPalette => JSON.stringify(savedPalette) !== paletteString);
@@ -48,7 +49,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       message: "Palette deleted successfully",
       palette: palette,
-      email: email
+      email: email,
+      action: "delete"
     }, { status: 201 });
   }
 }
