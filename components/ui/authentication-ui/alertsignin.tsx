@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import { signIn } from "next-auth/react"
 
 export function AlertSignIn({showAlert, setShowAlert}: {showAlert: boolean, setShowAlert: (showAlert: boolean) => void}){
   return (
@@ -17,7 +18,7 @@ export function AlertSignIn({showAlert, setShowAlert}: {showAlert: boolean, setS
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Login to use save features</AlertDialogTitle>
+          <AlertDialogTitle>Sign in to use save features</AlertDialogTitle>
           <AlertDialogDescription>
             Saving colors and palettes requires an account.
             <br></br>
@@ -26,7 +27,7 @@ export function AlertSignIn({showAlert, setShowAlert}: {showAlert: boolean, setS
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setShowAlert(!showAlert)}>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => setShowAlert(!showAlert)}>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={() => signIn("google")}>Sign In</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
