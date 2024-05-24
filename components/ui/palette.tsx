@@ -149,7 +149,7 @@ const Palette = ({
       value={colorInstance}
       style={{
         backgroundColor: "#" + colorInstance,
-        height: "calc(100vh - 6rem",
+        height: "calc(100vh - 6rem)",
         width: "100%",
       }}
       className={

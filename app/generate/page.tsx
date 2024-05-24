@@ -7,14 +7,12 @@ import { coolPalettes } from "@/lib/coolpalettes";
 
 function Page() {
 
-  sessionStorage.clear()
-
   const navigate = useRouter();
 
-  const randomIndex = Math.floor(Math.random() * coolPalettes.length);
-  const colorURL = coolPalettes[randomIndex].join("-").replaceAll("#", "");
-
   useEffect(() => {
+    sessionStorage.clear();
+    const randomIndex = Math.floor(Math.random() * coolPalettes.length);
+    const colorURL = coolPalettes[randomIndex].join("-").replaceAll("#", "");
     setTimeout(() => {
     navigate.push(`/colors/${colorURL}`);
     }, 500)

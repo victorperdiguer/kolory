@@ -34,12 +34,11 @@ const averageColor = (color1: string, color2: string) => {
 };
 
 export default function Page({ params }: { params: { pattern: string } }) {
-  let aux = sessionStorage.getItem('lockedColors') as string;
-  const initialLockedColors = JSON.parse(aux) as number[] || [];
+
 
   const navigate = useRouter();
   const [colors, setColors] = useState(params.pattern.split('-'));
-  const [lockedColors, setLockedColors] = useState<number[]>(initialLockedColors as number[]);
+  const [lockedColors, setLockedColors] = useState<number[]>([]);
   const [showSideMenu, setShowSideMenu] = useState<boolean>(false);
 
   const { toPDF, targetRef } = usePDF({
@@ -47,6 +46,18 @@ export default function Page({ params }: { params: { pattern: string } }) {
     filename: "palettes.pdf",
     page: { orientation: "landscape", format: "a5" },
   });
+
+  useEffect(() => {
+    if (sessionStorage.getItem('lockedColors') !== null) {
+        let aux = sessionStorage.getItem('lockedColors') as string;
+        const initialLockedColors = JSON.parse(aux) as number[] || [];
+        setLockedColors(initialLockedColors);
+    } else {
+        const initialLockedColors = [] as number[];
+        setLockedColors(initialLockedColors);
+        sessionStorage.setItem('lockedColors', JSON.stringify(initialLockedColors));
+    }
+  }, []);
 
   const handleLockColor = (clickedColorPosition: number, deleted?: boolean, colorAdded?: boolean) => {
     let newLockedColors = [] as number[];
@@ -137,7 +148,7 @@ export default function Page({ params }: { params: { pattern: string } }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [lockedColors]);
+  }, [lockedColors, colors, navigate]);
 
   return (
     <LockedColorsContext.Provider value={{ lockedColors, handleLockColor }}>

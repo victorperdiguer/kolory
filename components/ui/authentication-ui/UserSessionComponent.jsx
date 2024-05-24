@@ -17,7 +17,7 @@ const UserSessionComponent = () => {
         <div className="flex justify-center items-center gap-5">
           <div>
             <Avatar>
-              <AvatarImage src={session.user.image} />
+              <AvatarImage src={session?.user?.image} />
               <AvatarFallback style={{ backgroundColor: 'zinc', color: 'black' }}>
                 {initials.substring(0, 2).toUpperCase()}
               </AvatarFallback>
