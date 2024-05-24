@@ -17,19 +17,12 @@ const handler = NextAuth({
   callbacks: {
     async signIn({user, account, profile}): Promise<string | boolean> {
         if (account?.provider === 'google'){
-          const { name, email } = user
+          const { name, email, image } = user
           try {
             await connectMongoDB()
             const userExists = await User.findOne({ email })
             if (!userExists) {
-              const url = process.env.APP_URL+'/api/user'
-              const data = { name, email }
-              const res = await axios.post(url, data, {
-                headers: {
-                  "Content-Type": "application/json"
-                }
-              })
-              console.log(res.data)
+              await User.create({name, email, avatar: image})
             }
           } catch (error) {
             console.error(error)
