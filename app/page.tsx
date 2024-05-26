@@ -63,13 +63,13 @@ export default function Home() {
                   </div>
                 </a>
                 <p className="text-sm">
-                  Based on Fabrizio's{" "}
+                  Based on Fabrizio's
                   <a href="coolors.co">
                     <span className="font-bold">coolors.co</span>
                   </a>
                 </p>
                 <div className="flex items-center pt-2">
-                  <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+                  <CalendarDays className="mr-2 h-4 w-4 opacity-70" />-
                   <span className="text-xs text-muted-foreground">
                     Deployed May 2024
                   </span>
