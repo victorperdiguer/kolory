@@ -47,7 +47,7 @@ export default function Home() {
       <div className="fixed bottom-1 left-1/2 transform -translate-x-1/2">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <Badge variant="default">Made with &hearts; by @vicpec</Badge>
+            <Badge variant="default">Made with<span className="text-red-400">&nbsp;{" "}&hearts;{" "}&nbsp;</span>by @vicpec</Badge>
           </HoverCardTrigger>
           <HoverCardContent className="w-80">
             <div className="flex justify-center space-x-4">
@@ -63,13 +63,13 @@ export default function Home() {
                   </div>
                 </a>
                 <p className="text-sm">
-                  Based on Fabrizio's
+                  Based on Fabrizio's{" "}
                   <a href="coolors.co">
                     <span className="font-bold">coolors.co</span>
                   </a>
                 </p>
                 <div className="flex items-center pt-2">
-                  <CalendarDays className="mr-2 h-4 w-4 opacity-70" />-
+                  <CalendarDays className="mr-2 h-4 w-4 opacity-70" />
                   <span className="text-xs text-muted-foreground">
                     Deployed May 2024
                   </span>
