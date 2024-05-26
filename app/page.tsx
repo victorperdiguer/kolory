@@ -63,9 +63,9 @@ export default function Home() {
                   </div>
                 </a>
                 <p className="text-sm">
-                  Based on Fabrizio's{" "}
+                  Based on Fabrizio&apos;s
                   <a href="coolors.co">
-                    <span className="font-bold">coolors.co</span>
+                    <span className="font-bold">&nbsp;coolors.co</span>
                   </a>
                 </p>
                 <div className="flex items-center pt-2">
