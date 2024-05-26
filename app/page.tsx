@@ -47,7 +47,7 @@ export default function Home() {
       <div className="fixed bottom-1 left-1/2 transform -translate-x-1/2">
         <HoverCard>
           <HoverCardTrigger asChild>
-            <Badge variant="default">Made with ♥️ by @vicpec</Badge>
+            <Badge variant="default">Made with &hearts; by @vicpec</Badge>
           </HoverCardTrigger>
           <HoverCardContent className="w-80">
             <div className="flex justify-center space-x-4">
