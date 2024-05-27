@@ -1,8 +1,9 @@
+# Kolory
+
 Kolory is my first ever NextJS project. It is trying to replicate (albeit with a few differences) Fabrizio's popular [Coolors](coolors.co).
 
-<img width="1426" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/71552aef-306a-48a6-a3a6-ff8a539b1520">
+<img width="1431" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/733988c5-97f2-4fcf-b996-4962327c52fe">
 
-# Kolory
 ## Features
 
 Generate custom made harmonious color palettes with a simple UI. 
@@ -43,6 +44,8 @@ The URL will change based on the colors being displayed, making sharing color pa
 
 ### Share your palettes
 - Share your palettes through URL links or by downloading the palette in PNG or PDF formats
+<img width="1186" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/0a46e774-7f4a-4bb9-aef1-1586e83ab5e9">
+
 
 ## Tech Stack
 
