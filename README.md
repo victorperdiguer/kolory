@@ -18,8 +18,6 @@ The URL will change based on the colors being displayed, making sharing color pa
 - You can add as many colors as you want to work with as big a palette as you want -- just be wary, the FE might start looking funky
 <img width="1187" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/a5e349aa-d077-4a65-9b42-684ec5132c43">
 <img width="1186" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/34747f8c-6f17-438f-8fa7-227610228ce7">
-<img width="234" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/308d2941-8152-4d61-96bb-8a6617868a0e">
-
 
 ## Locking colors
 - Found colors you like? Lock them in so they are not randomized when pressing SPACEBAR again
