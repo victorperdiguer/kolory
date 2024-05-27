@@ -26,6 +26,8 @@ The URL will change based on the colors being displayed, making sharing color pa
 
 ### Reordering the palette
 - Freely reorder the color palette to check contrasts and harmonies between colors
+![image](https://github.com/victorperdiguer/kolory/assets/115891056/11056931-e7ae-432a-a155-c5050cea95eb)
+
 
 ### Pick a color's particular shade
 - Click on the layers icon to choose a different shade/tint of each color
@@ -41,10 +43,11 @@ The URL will change based on the colors being displayed, making sharing color pa
 
 ### Google Sign Up
 - Use your Google account to securely sign up and save your favorite colors and palettes
+<img width="1186" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/0a46e774-7f4a-4bb9-aef1-1586e83ab5e9">
 
 ### Share your palettes
 - Share your palettes through URL links or by downloading the palette in PNG or PDF formats
-<img width="1186" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/0a46e774-7f4a-4bb9-aef1-1586e83ab5e9">
+<img width="1434" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/222f0f6c-c5cc-4db4-bcf4-7d4b998ace05">
 
 
 ## Tech Stack
