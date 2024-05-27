@@ -10,7 +10,7 @@ Generate custom made harmonious color palettes with a simple UI.
 The URL will change based on the colors being displayed, making sharing color palettes very easy.
 
 ### Generate random color palettes
-- Pressing the SPACEBAR will randomize all colors displayed
+- Pressing the **SPACEBAR** will randomize all colors displayed
 - The random palette generator works based off a predetermined set of proven pleasant palettes and complete random color generation
 
 ### Add and delete colors
@@ -26,8 +26,7 @@ The URL will change based on the colors being displayed, making sharing color pa
 
 ### Reordering the palette
 - Freely reorder the color palette to check contrasts and harmonies between colors
-![image](https://github.com/victorperdiguer/kolory/assets/115891056/11056931-e7ae-432a-a155-c5050cea95eb)
-
+<img width="1186" alt="image" src="https://github.com/victorperdiguer/kolory/assets/115891056/11056931-e7ae-432a-a155-c5050cea95eb">
 
 ### Pick a color's particular shade
 - Click on the layers icon to choose a different shade/tint of each color
