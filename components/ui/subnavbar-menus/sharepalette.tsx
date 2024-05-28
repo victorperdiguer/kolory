@@ -10,7 +10,6 @@ import {
 import { Button } from "../button";
 import { useToast } from "../use-toast";
 import useCopy from "@/app/hooks/use-copy";
-import { usePathname } from "next/navigation";
 import { useState, useCallback } from "react";
 import {toPng} from "html-to-image";
 
@@ -20,11 +19,9 @@ const SharePalette = ({targetRef, handleExportPdf}: { targetRef: React.MutableRe
   const [open, setOpen] = useState<boolean>(false);
   const { copy } = useCopy();
   const { toast } = useToast();
-  const pathname = usePathname();
 
   const handleCopyUrl = () => {
-    // TODO - add live url
-    copy(pathname);
+    copy(window.location.href);
     toast({
       title: "✅ URL copied to clipboard",
     });
